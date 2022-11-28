@@ -1,0 +1,9 @@
+{
+  "name": "@tango/registry",
+  "version": "0.1.0",
+  "description": "yet, plugin system engine",
+  "scripts": {},
+  "keywords": [],
+  "author": "jian.huang",
+  "license": "ISC"
+}

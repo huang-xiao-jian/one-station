@@ -1,0 +1,9 @@
+{
+  "name": "@tango/cli",
+  "version": "0.1.0",
+  "description": "yet, plugin driver",
+  "scripts": {},
+  "keywords": [],
+  "author": "jian.huang",
+  "license": "ISC"
+}
