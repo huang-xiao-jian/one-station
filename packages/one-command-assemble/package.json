@@ -1,0 +1,9 @@
+{
+  "name": "@one/command-assemble",
+  "version": "0.1.0",
+  "description": "yet, assemble plugin to aggregate artifacts",
+  "scripts": {},
+  "keywords": [],
+  "author": "jian.huang",
+  "license": "ISC"
+}

@@ -1,7 +1,7 @@
 {
-  "name": "@tango/cli",
+  "name": "@one/command-union",
   "version": "0.1.0",
-  "description": "yet, plugin driver",
+  "description": "yet, union plugin to aggregate gitlab source code",
   "scripts": {},
   "keywords": [],
   "author": "jian.huang",

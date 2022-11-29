@@ -1,32 +1,53 @@
 lockfileVersion: 5.4
 
-specifiers:
-  '@commitlint/cli': ^8.3.6
-  '@commitlint/config-conventional': ^8.3.6
-  '@trivago/prettier-plugin-sort-imports': ^3.4.0
-  '@types/jest': ^25.2.3
-  '@types/node': ^14.18.33
-  cz-conventional-changelog: 3.1.1
-  husky: ^8.0.2
-  lint-staged: ^10.5.4
-  prettier: ^2.8.0
-  typescript: ^4.9.3
-  utility-types: ^3.10.0
+importers:
 
-dependencies:
-  utility-types: 3.10.0
+  .:
+    specifiers:
+      '@commitlint/cli': ^8.3.6
+      '@commitlint/config-conventional': ^8.3.6
+      '@trivago/prettier-plugin-sort-imports': ^3.4.0
+      '@types/jest': ^25.2.3
+      '@types/node': ^14.18.33
+      cz-conventional-changelog: 3.1.1
+      husky: ^8.0.2
+      lint-staged: ^10.5.4
+      prettier: ^2.8.0
+      typescript: ^4.9.3
+      utility-types: ^3.10.0
+    dependencies:
+      utility-types: 3.10.0
+    devDependencies:
+      '@commitlint/cli': 8.3.6
+      '@commitlint/config-conventional': 8.3.6
+      '@trivago/prettier-plugin-sort-imports': 3.4.0_prettier@2.8.0
+      '@types/jest': 25.2.3
+      '@types/node': 14.18.33
+      cz-conventional-changelog: 3.1.1
+      husky: 8.0.2
+      lint-staged: 10.5.4
+      prettier: 2.8.0
+      typescript: 4.9.3
 
-devDependencies:
-  '@commitlint/cli': 8.3.6
-  '@commitlint/config-conventional': 8.3.6
-  '@trivago/prettier-plugin-sort-imports': 3.4.0_prettier@2.8.0
-  '@types/jest': 25.2.3
-  '@types/node': 14.18.33
-  cz-conventional-changelog: 3.1.1
-  husky: 8.0.2
-  lint-staged: 10.5.4
-  prettier: 2.8.0
-  typescript: 4.9.3
+  packages/tango-cli:
+    specifiers:
+      commander: ^9.4.1
+      typescript: ^4.9.3
+    dependencies:
+      commander: 9.4.1
+      typescript: 4.9.3
+
+  packages/tango-command-assemble:
+    specifiers: {}
+
+  packages/tango-command-union:
+    specifiers: {}
+
+  packages/tango-registry:
+    specifiers:
+      commander: ^9.4.1
+    dependencies:
+      commander: 9.4.1
 
 packages:
 
@@ -999,6 +1020,11 @@ packages:
     resolution: {integrity: sha512-U7VdrJFnJgo4xjrHpTzu0yrHPGImdsmD95ZlgYSEajAn2JKzDhDTPG9kBTefmObL2w/ngeZnilk+OV9CG3d7UA==}
     engines: {node: '>= 6'}
     dev: true
+
+  /commander/9.4.1:
+    resolution: {integrity: sha512-5EEkTNyHNGFPD2H+c/dXXfQZYa/scCKasxWcXJaWnNJ99pnQN9Vnmqow+p+PlFPE63Q6mThaZws1T+HxfpgtPw==}
+    engines: {node: ^12.20.0 || >=14}
+    dev: false
 
   /commitizen/4.2.5:
     resolution: {integrity: sha512-9sXju8Qrz1B4Tw7kC5KhnvwYQN88qs2zbiB8oyMsnXZyJ24PPGiNM3nHr73d32dnE3i8VJEXddBFIbOgYSEXtQ==}
@@ -2734,7 +2760,6 @@ packages:
     resolution: {integrity: sha512-CIfGzTelbKNEnLpLdGFgdyKhG23CKdKgQPOBc+OUNrkJ2vr+KSzsSV5kq5iWhEQbok+quxgGzrAtGWCyU7tHnA==}
     engines: {node: '>=4.2.0'}
     hasBin: true
-    dev: true
 
   /universalify/2.0.0:
     resolution: {integrity: sha512-hAZsKq7Yy11Zu1DE0OzWjw7nnLZmJZYTDZZyEFHZdUhV8FkH5MCfoU1XMaxXovpyW5nq5scPqq0ZDP9Zyl04oQ==}

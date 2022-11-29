@@ -1,0 +1,19 @@
+{
+  "name": "@tango/cli",
+  "version": "0.1.0",
+  "description": "yet, plugin driver",
+  "main": "lib/index.js",
+  "scripts": {
+    "dev": "tsc --watch"
+  },
+  "bin": {
+    "one": "./bin/one.js"
+  },
+  "keywords": [],
+  "author": "jian.huang <hjj491229492@hotmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "commander": "^9.4.1",
+    "typescript": "^4.9.3"
+  }
+}
