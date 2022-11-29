@@ -12,9 +12,13 @@ export interface ICommandDescriptor {
   /**
    * 命令行入参设置
    */
-  onInit: (command: Command) => void;
+  onArguments?: (command: Command) => void;
+  /**
+   * 命令行入参设置
+   */
+  onOptions?: (command: Command) => void;
   /**
    * 命令行功能实现
    */
-  onAction: (command: Command) => void;
+  onAction: (command: Command) => Promise<void>;
 }

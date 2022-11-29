@@ -2,8 +2,18 @@
   "name": "@one/command-assemble",
   "version": "0.1.0",
   "description": "yet, assemble plugin to aggregate artifacts",
-  "scripts": {},
+  "main": "lib/index.js",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
   "keywords": [],
   "author": "jian.huang",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@one/plugin": "workspace:^"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3"
+  }
 }

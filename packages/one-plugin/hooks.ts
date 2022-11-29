@@ -3,7 +3,7 @@ import { ICommandDescriptor } from './Command';
 /**
  * 被动模式注册命令行
  */
-interface OneCommandPluginHooks {
+export interface OneCommandPluginHooks {
   registerCommand: (cmd: ICommandDescriptor) => void;
 }
 
