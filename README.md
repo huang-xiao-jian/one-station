@@ -1,3 +1,3 @@
-# @tango/one
+# @one/station
 
-yet, the unify tools within.
+yet, vscode flavor architecture for pandora

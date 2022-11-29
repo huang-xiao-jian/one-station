@@ -1,7 +1,7 @@
 {
   "name": "@tango/cli",
   "version": "0.1.0",
-  "description": "yet, plugin driver",
+  "description": "yet, vscode flavor architecture for pandora",
   "main": "lib/index.js",
   "scripts": {
     "dev": "tsc --watch",
