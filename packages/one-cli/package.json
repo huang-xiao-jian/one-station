@@ -17,7 +17,8 @@
     "@one/command-assemble": "workspace:^",
     "@one/plugin": "workspace:^",
     "commander": "^9.4.1",
-    "cosmiconfig": "^8.0.0"
+    "cosmiconfig": "^8.0.0",
+    "joi": "^17.7.0"
   },
   "devDependencies": {
     "typescript": "^4.9.3"

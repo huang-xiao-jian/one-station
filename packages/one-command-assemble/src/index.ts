@@ -1,20 +1,33 @@
-import { OnePluginHooks, IOneCommandPluginRegistry } from '@one/plugin';
+import { OnePluginHooks, ICommandPluginRegistry, IConfigRegistry } from '@one/plugin';
+import { AssembleOptionSchema } from './options.schema';
 
 class OneCommandAssemble implements OnePluginHooks {
   /**
+   * 注册外部依赖
+   */
+  onConfigInit(hooks: IConfigRegistry) {
+    hooks.registerConfig({
+      key: 'assemble',
+      schema: AssembleOptionSchema,
+    });
+
+    hooks.registerEnvironmentVariable({
+      name: 'NODE_ENV',
+      description: 'yet, convenient way for adjust internal behavior',
+      default: 'development',
+    });
+  }
+  /**
    * 注册核心指令
    */
-  onCommandInit(hooks: IOneCommandPluginRegistry) {
+  onCommandInit(hooks: ICommandPluginRegistry) {
     hooks
       .registerCommand({
         name: 'assemble',
         description: 'yet, assemble plugin to aggregate artifacts',
       })
-      .defineEnvironment({
-        name: 'NODE_ENV',
-        description: 'yet, convenient way for adjust internal behavior',
-        default: 'development',
-      })
+      .referenceConfig('assemble')
+      .referenceEnvironmentVariable('NODE_ENV')
       .defineBehavior((command) => {
         command.option('-w, --watch [watch]', 'assemble in continuous mode');
       })

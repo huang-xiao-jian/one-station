@@ -11,7 +11,8 @@
   "author": "jian.huang",
   "license": "ISC",
   "dependencies": {
-    "@one/plugin": "workspace:^"
+    "@one/plugin": "workspace:^",
+    "joi": "^17.7.0"
   },
   "devDependencies": {
     "typescript": "^4.9.3"

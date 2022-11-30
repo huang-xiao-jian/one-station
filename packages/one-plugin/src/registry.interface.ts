@@ -4,7 +4,11 @@ export interface ICommandHooks {
   /**
    * 引用依赖环境变量，支持链式调用
    */
-  referenceEnvironment: (name: string) => ICommandHooks;
+  referenceEnvironmentVariable: (name: string | string[]) => ICommandHooks;
+  /**
+   * 引用配置文件内容
+   */
+  referenceConfig: (name: string | string[]) => ICommandHooks;
   /**
    * 注册命令行可变参数，支持链式调用
    */

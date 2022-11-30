@@ -18,15 +18,15 @@ export interface ICommandInjection {
   /**
    * 读取环境变量
    */
-  env: (name: string) => any;
+  env: <T = string>(name: string) => T;
   /**
    * 读取文件配置内容
    */
-  config: (name: string) => any;
+  config: <T = unknown>(name: string) => T;
   /**
    * 读取外源配置文件内容
    */
-  cosmic: (name: string) => any;
+  cosmic: <T = unknown>(name: string) => T;
 }
 
 /**
