@@ -14,9 +14,10 @@
   "author": "jian.huang <hjj491229492@hotmail.com>",
   "license": "ISC",
   "dependencies": {
-    "commander": "^9.4.1",
     "@one/command-assemble": "workspace:^",
-    "@one/plugin": "workspace:^"
+    "@one/plugin": "workspace:^",
+    "commander": "^9.4.1",
+    "cosmiconfig": "^8.0.0"
   },
   "devDependencies": {
     "typescript": "^4.9.3"

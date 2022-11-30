@@ -12,18 +12,21 @@ export interface ICommandDescriptor {
 }
 
 /**
- * 环境变量定义对
- */
-export interface IEnvironmentPair {
-  name: string;
-  value: any;
-}
-
-/**
  * 命令行依赖外部数据注入
  */
 export interface ICommandInjection {
+  /**
+   * 读取环境变量
+   */
   env: (name: string) => any;
+  /**
+   * 读取文件配置内容
+   */
+  config: (name: string) => any;
+  /**
+   * 读取外源配置文件内容
+   */
+  cosmic: (name: string) => any;
 }
 
 /**
@@ -37,26 +40,3 @@ export type ICommandBehavior = (command: Command) => void;
 export type ICommandAction = (
   injection: ICommandInjection,
 ) => (command: Command) => void | Promise<void>;
-
-/**
- * 环境变量依赖描述
- */
-export interface ICommandEnvironmentDescriptor<T = any> {
-  /**
-   * 环境变量声明
-   */
-  name: string;
-  /**
-   * 环境变量说明
-   */
-  description: string;
-  /**
-   * 环境变量默认值，可选
-   */
-  default?: T;
-  /**
-   * 入参转换函数，可选
-   * 命令行默认参数为字符串
-   */
-  transform?: (raw: string) => T;
-}
