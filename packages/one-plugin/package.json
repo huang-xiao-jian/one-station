@@ -2,11 +2,21 @@
   "name": "@one/plugin",
   "version": "0.1.0",
   "description": "yet, plugin system engine",
-  "scripts": {},
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
   "keywords": [],
   "author": "jian.huang",
   "license": "ISC",
   "dependencies": {
-    "commander": "^9.4.1"
+    "commander": "^9.4.1",
+    "lodash": "^4.17.21"
+  },
+  "devDependencies": {
+    "typescript": "^4.9.3",
+    "@types/lodash": "^4.14.190"
   }
 }
