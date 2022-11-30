@@ -9,5 +9,5 @@ export interface OnePluginHooks {
   /**
    * 命令行声明
    */
-  onCommandInit: (hooks: ICommandPluginRegistry) => void;
+  onCommandInit?: (hooks: ICommandPluginRegistry) => void;
 }

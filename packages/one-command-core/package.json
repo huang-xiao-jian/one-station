@@ -1,24 +1,16 @@
 {
-  "name": "@tango/cli",
+  "name": "@one/command-core",
   "version": "0.1.0",
-  "description": "yet, vscode flavor architecture for pandora",
-  "main": "lib/index.js",
+  "description": "yet, builtIn plugin collection",
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc"
-  },
-  "bin": {
-    "one": "./bin/one.js"
   },
   "keywords": [],
   "author": "jian.huang <hjj491229492@hotmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@one/command-assemble": "workspace:^",
-    "@one/command-core": "workspace:^",
     "@one/plugin": "workspace:^",
-    "commander": "^9.4.1",
-    "cosmiconfig": "^8.0.0",
     "joi": "^17.7.0"
   },
   "devDependencies": {
