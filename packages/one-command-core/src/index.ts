@@ -1,9 +1,9 @@
 import Joi from 'joi';
 import path from 'path';
-import { OnePluginHooks, IConfigRegistry, IConfigTransformMaterial } from '@one/plugin';
+import { OnePluginHooks, IPivotRegistry, IConfigTransformMaterial } from '@one/plugin';
 
 const OneCommandCore: OnePluginHooks = {
-  onConfigInit(hooks: IConfigRegistry) {
+  onConfigInit(hooks: IPivotRegistry) {
     /**
      * 推荐设置为项目根目录
      */

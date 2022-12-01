@@ -14,7 +14,7 @@ export interface ICommandDescriptor {
 /**
  * 命令行依赖外部数据注入
  */
-export interface ICommandInjection {
+export interface ICommandAccessor {
   /**
    * 读取环境变量
    */
@@ -22,11 +22,11 @@ export interface ICommandInjection {
   /**
    * 读取文件配置内容
    */
-  config: <T = unknown>(name: string) => T;
+  config: <T = any>(name: string) => T;
   /**
    * 读取外源配置文件内容
    */
-  cosmic: <T = unknown>(name: string) => T;
+  cosmic: <T = any>(name: string) => T;
 }
 
 /**
@@ -38,5 +38,5 @@ export type ICommandBehavior = (command: Command) => void;
  * 命令行功能执行
  */
 export type ICommandAction = (
-  injection: ICommandInjection,
+  injection: ICommandAccessor,
 ) => (command: Command) => void | Promise<void>;

@@ -6,6 +6,8 @@
     "dev": "tsc --watch",
     "build": "tsc"
   },
+  "main": "lib/index.js",
+  "types": "src/index.ts",
   "keywords": [],
   "author": "jian.huang <hjj491229492@hotmail.com>",
   "license": "ISC",

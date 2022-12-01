@@ -4,11 +4,11 @@ export interface ICommandHooks {
   /**
    * 引用依赖环境变量，支持链式调用
    */
-  referenceEnvironmentVariable: (name: string | string[]) => ICommandHooks;
+  referenceEnvironmentVariable: (names: string | string[]) => ICommandHooks;
   /**
    * 引用配置文件内容
    */
-  referenceConfig: (name: string | string[]) => ICommandHooks;
+  referenceConfig: (names: string | string[]) => ICommandHooks;
   /**
    * 注册命令行可变参数，支持链式调用
    */
@@ -19,7 +19,7 @@ export interface ICommandHooks {
   defineAction: (action: ICommandAction) => void;
 }
 
-export interface ICommandPluginRegistry {
+export interface ICommandRegistry {
   /**
    * 被动模式注册命令行
    */

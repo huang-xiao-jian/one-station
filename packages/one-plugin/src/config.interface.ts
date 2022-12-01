@@ -64,7 +64,7 @@ export interface ICosmiConfigDescriptor {
   schema: Schema;
 }
 
-export interface IConfigRegistry {
+export interface IPivotRegistry {
   /**
    * 注册统一配置文件属性
    */

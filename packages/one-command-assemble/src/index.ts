@@ -1,11 +1,11 @@
-import { OnePluginHooks, ICommandPluginRegistry, IConfigRegistry } from '@one/plugin';
+import { OnePluginHooks, ICommandRegistry, IPivotRegistry } from '@one/plugin';
 import { AssembleOptionSchema } from './options.schema';
 
 const OneCommandAssemble: OnePluginHooks = {
   /**
    * 注册外部依赖
    */
-  onConfigInit(hooks: IConfigRegistry) {
+  onConfigInit(hooks: IPivotRegistry) {
     hooks.registerConfig({
       key: 'assemble',
       schema: AssembleOptionSchema,
@@ -14,7 +14,7 @@ const OneCommandAssemble: OnePluginHooks = {
   /**
    * 注册核心指令
    */
-  onCommandInit(hooks: ICommandPluginRegistry) {
+  onCommandInit(hooks: ICommandRegistry) {
     hooks
       .registerCommand({
         name: 'assemble',
