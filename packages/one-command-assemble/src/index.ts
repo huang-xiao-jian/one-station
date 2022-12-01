@@ -1,7 +1,7 @@
 import { OnePluginHooks, ICommandPluginRegistry, IConfigRegistry } from '@one/plugin';
 import { AssembleOptionSchema } from './options.schema';
 
-class OneCommandAssemble implements OnePluginHooks {
+const OneCommandAssemble: OnePluginHooks = {
   /**
    * 注册外部依赖
    */
@@ -10,13 +10,7 @@ class OneCommandAssemble implements OnePluginHooks {
       key: 'assemble',
       schema: AssembleOptionSchema,
     });
-
-    hooks.registerEnvironmentVariable({
-      name: 'NODE_ENV',
-      description: 'yet, convenient way for adjust internal behavior',
-      default: 'development',
-    });
-  }
+  },
   /**
    * 注册核心指令
    */
@@ -38,7 +32,7 @@ class OneCommandAssemble implements OnePluginHooks {
         console.log('Options: ', command.opts());
         console.groupEnd();
       });
-  }
-}
+  },
+};
 
-export default new OneCommandAssemble();
+export default OneCommandAssemble;

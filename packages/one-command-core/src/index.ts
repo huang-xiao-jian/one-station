@@ -2,7 +2,7 @@ import Joi from 'joi';
 import path from 'path';
 import { OnePluginHooks, IConfigRegistry } from '@one/plugin';
 
-export class OneCommandCore implements OnePluginHooks {
+const OneCommandCore: OnePluginHooks = {
   onConfigInit(hooks: IConfigRegistry) {
     /**
      * 推荐设置为项目根目录
@@ -21,5 +21,16 @@ export class OneCommandCore implements OnePluginHooks {
       schema: Joi.string(),
       default: path.join(process.cwd(), 'dist'),
     });
-  }
-}
+
+    /**
+     * 核心环境变量，回收内部插件处理
+     */
+    hooks.registerEnvironmentVariable({
+      name: 'NODE_ENV',
+      description: 'yet, convenient way for adjust internal behavior',
+      default: 'development',
+    });
+  },
+};
+
+export default OneCommandCore;
