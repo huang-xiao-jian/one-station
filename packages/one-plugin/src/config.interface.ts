@@ -1,5 +1,16 @@
 import { Schema } from 'joi';
 
+export interface IConfigTransformMaterial<Value = any> {
+  /**
+   * 配置文件绝对路径
+   */
+  rcfile: string;
+  /**
+   * 配置文件键值
+   */
+  value: Value;
+}
+
 export interface IConfigDescriptor {
   /**
    * 统一配置文件属性 Key
@@ -9,6 +20,10 @@ export interface IConfigDescriptor {
    * 统一配置文件属性默认值
    */
   default?: any;
+  /**
+   * 数据转换，常用语相对路径转绝对路径
+   */
+  transform?: (material: IConfigTransformMaterial) => any;
   /**
    * 统一配置文件属性值校验
    */

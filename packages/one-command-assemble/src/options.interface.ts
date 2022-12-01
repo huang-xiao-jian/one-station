@@ -16,16 +16,6 @@ export interface AssembleTask {
   assignment: string;
 }
 
-/**
- * 外部依赖参数
- */
-export interface AssembleDependencyOptions {
-  /**
-   * 允许外部调整输出目录
-   */
-  outDir: string;
-}
-
 export interface AssembleOption {
   tasks: AssembleTask[];
 }

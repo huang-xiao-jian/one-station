@@ -1,6 +1,6 @@
 import Joi from 'joi';
 import path from 'path';
-import { OnePluginHooks, IConfigRegistry } from '@one/plugin';
+import { OnePluginHooks, IConfigRegistry, IConfigTransformMaterial } from '@one/plugin';
 
 const OneCommandCore: OnePluginHooks = {
   onConfigInit(hooks: IConfigRegistry) {
@@ -11,6 +11,9 @@ const OneCommandCore: OnePluginHooks = {
       key: 'root',
       schema: Joi.string(),
       default: process.cwd(),
+      transform(material: IConfigTransformMaterial<string>) {
+        return path.join(material.rcfile, material.value);
+      },
     });
 
     /**
@@ -20,6 +23,9 @@ const OneCommandCore: OnePluginHooks = {
       key: 'outDir',
       schema: Joi.string(),
       default: path.join(process.cwd(), 'dist'),
+      transform(material: IConfigTransformMaterial<string>) {
+        return path.join(material.rcfile, material.value);
+      },
     });
 
     /**
