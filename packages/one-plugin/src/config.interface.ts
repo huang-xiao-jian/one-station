@@ -17,17 +17,17 @@ export interface IConfigDescriptor {
    */
   key: string;
   /**
+   * 统一配置文件属性值校验
+   */
+  schema: Schema;
+  /**
    * 统一配置文件属性默认值
    */
-  default?: any;
+  default?: ((rcFile: string) => any) | any;
   /**
    * 数据转换，常用语相对路径转绝对路径
    */
   transform?: (material: IConfigTransformMaterial) => any;
-  /**
-   * 统一配置文件属性值校验
-   */
-  schema: Schema;
 }
 
 /**

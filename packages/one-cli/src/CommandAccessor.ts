@@ -1,15 +1,20 @@
 import { Injectable } from 'injection-js';
 import { ICommandAccessor } from '@one/plugin';
 import { PivotRegistry } from './PivotRegistry';
+import { EnvironmentManager } from './EnvironmentManager';
+import { ConfigManager } from './ConfigManager';
 
 @Injectable()
 export class CommandAccessor implements ICommandAccessor {
-  constructor(private readonly registry: PivotRegistry) {}
+  constructor(
+    private readonly configManager: ConfigManager,
+    private readonly environmentManager: EnvironmentManager,
+  ) {}
   /**
    * 环境变量访问器
    */
   env<T>(name: string): T {
-    return this.registry.consumeEnvironmentVariable(name);
+    return this.environmentManager.consumeEnvironmentVariable(name);
   }
 
   /**

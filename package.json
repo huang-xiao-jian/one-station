@@ -1,18 +1,14 @@
 {
-  "name": "@tango/one",
+  "name": "@one/station",
   "version": "0.17.0",
-  "description": "yet, naive file system synchronizer.",
-  "private": "true",
+  "description": "yet, vscode flavor command tools",
+  "private": true,
   "engines": {
     "node": ">=16.0.0"
   },
-  "scripts": {},
-  "files": [],
-  "bin": {},
-  "workspaces": {
-    "packages": [
-      "packages/**"
-    ]
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build"
   },
   "author": "huang.jian <hjj491229492@hotmail.com>",
   "contributors": [
@@ -31,14 +27,12 @@
     "husky": "^8.0.2",
     "lint-staged": "^10.5.4",
     "prettier": "^2.8.0",
+    "turbo": "^1.6.3",
     "typescript": "^4.9.3"
   },
   "config": {
     "commitizen": {
       "path": "cz-conventional-changelog"
     }
-  },
-  "dependencies": {
-    "utility-types": "^3.10.0"
   }
 }

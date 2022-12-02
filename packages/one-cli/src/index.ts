@@ -7,9 +7,11 @@ import { PivotRegistry } from './PivotRegistry';
 // explicit later
 import CommandAssemble from '@one/command-assemble';
 import CommandCore from '@one/command-core';
+import { ConfigManager } from './ConfigManager';
 
 // 初始化依赖注入
 const injector = ReflectiveInjector.resolveAndCreate([
+  ConfigManager,
   PivotRegistry,
   CommandRegistry,
   CommandAccessor,
@@ -18,19 +20,25 @@ const injector = ReflectiveInjector.resolveAndCreate([
 // 初始化主命令
 program.name('one').version('v0.1.0').description('yet, vscode flavor architecture for pandora');
 
+(async () => {
+  const cm: ConfigManager = injector.get(ConfigManager);
+
+  cm.loadConfigFile();
+})();
+
 // 挂载插件
-const pivotRegistry: PivotRegistry = injector.get(PivotRegistry);
-const commandRegistry: CommandRegistry = injector.get(CommandRegistry);
+// const pivotRegistry: PivotRegistry = injector.get(PivotRegistry);
+// const commandRegistry: CommandRegistry = injector.get(CommandRegistry);
 
-// 标准化模板代码
-CommandAssemble.onConfigInit?.(pivotRegistry);
-CommandAssemble.onCommandInit?.(commandRegistry);
-CommandCore.onConfigInit?.(pivotRegistry);
-CommandCore.onCommandInit?.(commandRegistry);
+// // 标准化模板代码
+// CommandAssemble.onConfigInit?.(pivotRegistry);
+// CommandAssemble.onCommandInit?.(commandRegistry);
+// CommandCore.onConfigInit?.(pivotRegistry);
+// CommandCore.onCommandInit?.(commandRegistry);
 
-// 添加子命令
-commandRegistry.commands.forEach((command) => {
-  program.addCommand(command);
-});
+// // 添加子命令
+// commandRegistry.commands.forEach((command) => {
+//   program.addCommand(command);
+// });
 
-program.parseAsync();
+// program.parseAsync();

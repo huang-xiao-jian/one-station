@@ -10,7 +10,10 @@ const OneCommandCore: OnePluginHooks = {
     hooks.registerConfig({
       key: 'root',
       schema: Joi.string(),
-      default: process.cwd(),
+      /**
+       * 少数特殊属性必须内建，项目根目录标记，默认为配置文件所在目录
+       */
+      default: (rcFile: string) => path.dirname(rcFile),
       transform(material: IConfigTransformMaterial<string>) {
         return path.join(material.rcfile, material.value);
       },
@@ -22,7 +25,9 @@ const OneCommandCore: OnePluginHooks = {
     hooks.registerConfig({
       key: 'outDir',
       schema: Joi.string(),
-      default: path.join(process.cwd(), 'dist'),
+      default: (rcFile: string) => {
+        return path.join(path.dirname(rcFile), 'dist');
+      },
       transform(material: IConfigTransformMaterial<string>) {
         return path.join(material.rcfile, material.value);
       },
