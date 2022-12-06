@@ -1,4 +1,11 @@
 /**
+ * 命令行传参
+ */
+export interface AssembleInlineOptions {
+  watch?: boolean;
+}
+
+/**
  * 路径皆相对于配置文件的相对文件
  */
 export interface AssembleTask {
@@ -18,6 +25,28 @@ export interface AssembleTask {
    * 构建产物聚合分配路径
    */
   assignment: string;
+}
+
+/**
+ * 内部执行者实际任务
+ */
+export interface AssembleTaskInternal {
+  /**
+   * 任务名称，用以输出提示信息
+   */
+  name: string;
+  /**
+   * 绝对路径，原始构建产物
+   */
+  source: string;
+  /**
+   * 绝对路径，目标复制地址
+   */
+  destiny: string;
+  /**
+   * 是否持续聚合模式
+   */
+  watch?: boolean;
 }
 
 export interface AssembleOption {

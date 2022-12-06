@@ -1,5 +1,9 @@
 import { OnePluginHooks, ICommandRegistry, IPivotRegistry } from '@one/plugin';
+import { AssembleInlineOptions, AssembleOption, AssembleTaskInternal } from './options.interface';
 import { AssembleOptionSchema } from './options.schema';
+import * as path from 'path';
+import { AssembleHandler } from './AssembleHandler';
+import { AssembleOptionsHandler } from './AssembleOptionsHandler';
 
 const OneCommandAssemble: OnePluginHooks = {
   /**
@@ -20,18 +24,18 @@ const OneCommandAssemble: OnePluginHooks = {
         name: 'assemble',
         description: 'yet, assemble plugin to aggregate artifacts',
       })
-      .referenceConfig('assemble')
+      .referenceConfig(['root', 'ourDir', 'assemble'])
       .referenceEnvironmentVariable('NODE_ENV')
       .defineBehavior((command) => {
         command.option('-w, --watch [watch]', 'assemble in continuous mode');
       })
-      .defineAction((injection) => (command) => {
-        console.group('OneCommandAssemble');
-        console.log('NODE_ENV:', injection.env('NODE_ENV'));
-        console.log('ASSEMBLE:', injection.config('assemble'));
-        console.log('Arguments:', command.args);
-        console.log('Options: ', command.opts());
-        console.groupEnd();
+      .defineAction((injection) => async (command) => {
+        const assembleOptionsHandler = new AssembleOptionsHandler(command, injection);
+        const tasks = await assembleOptionsHandler.handle();
+        const assembleHandler = new AssembleHandler(tasks);
+
+        // 实际执行子任务
+        await assembleHandler.handle();
       });
   },
 };

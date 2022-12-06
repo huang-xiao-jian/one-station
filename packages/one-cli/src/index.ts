@@ -32,10 +32,10 @@ import { EnvironmentManager } from './EnvironmentManager';
   const commandManager: CommandManager = injector.get(CommandManager);
 
   // 标准化模板代码
-  CommandAssemble.onConfigInit?.(pivotRegistry);
-  CommandAssemble.onCommandInit?.(commandRegistry);
   CommandCore.onConfigInit?.(pivotRegistry);
+  CommandAssemble.onConfigInit?.(pivotRegistry);
   CommandCore.onCommandInit?.(commandRegistry);
+  CommandAssemble.onCommandInit?.(commandRegistry);
 
   // 插件采集完毕，执行实际指令
   await commandManager.consumeCommands();
