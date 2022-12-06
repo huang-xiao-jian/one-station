@@ -58,7 +58,6 @@ importers:
   packages/one-command-assemble:
     specifiers:
       '@one/plugin': workspace:^
-      '@types/chalk': ^2.2.0
       '@types/fs-extra': ^9.0.13
       chalk: ^5.1.2
       chokidar: ^3.5.3
@@ -74,7 +73,6 @@ importers:
       fs-extra: 11.1.0
       joi: 17.7.0
     devDependencies:
-      '@types/chalk': 2.2.0
       '@types/fs-extra': 9.0.13
       typescript: 4.9.3
 
@@ -679,13 +677,6 @@ packages:
     dev: true
     optional: true
 
-  /@types/chalk/2.2.0:
-    resolution: {integrity: sha512-1zzPV9FDe1I/WHhRkf9SNgqtRJWZqrBWgu7JGveuHmmyR9CnAPCie2N/x+iHrgnpYBIcCJWHBoMRv2TRWktsvw==}
-    deprecated: This is a stub types definition for chalk (https://github.com/chalk/chalk). chalk provides its own type definitions, so you don't need @types/chalk installed!
-    dependencies:
-      chalk: 5.1.2
-    dev: true
-
   /@types/fs-extra/9.0.13:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
     dependencies:
@@ -1068,6 +1059,7 @@ packages:
   /chalk/5.1.2:
     resolution: {integrity: sha512-E5CkT4jWURs1Vy5qGJye+XwCkNj7Od3Af7CP6SujMetSMkLs8Do2RWJK5yx1wamHV/op8Rz+9rltjaTQWDnEFQ==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
+    dev: false
 
   /chardet/0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}

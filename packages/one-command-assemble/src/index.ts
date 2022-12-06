@@ -1,12 +1,11 @@
 import { OnePluginHooks, ICommandRegistry, IPivotRegistry } from '@one/plugin';
-import { AssembleInlineOptions, AssembleOption, AssembleTaskInternal } from './options.interface';
+import { AssembleInlineOptions } from './options.interface';
 import { AssembleOptionSchema } from './options.schema';
-import * as path from 'path';
 import { AssembleHandler } from './AssembleHandler';
 import { AssembleOptionsHandler } from './AssembleOptionsHandler';
 import { ContinuousAssembleHandler } from './ContinuousAssembleHandler';
 
-const OneCommandAssemble: OnePluginHooks = {
+const CommandAssemble: OnePluginHooks = {
   /**
    * 注册外部依赖
    */
@@ -26,7 +25,6 @@ const OneCommandAssemble: OnePluginHooks = {
         description: 'yet, assemble plugin to aggregate artifacts',
       })
       .referenceConfig(['root', 'ourDir', 'assemble'])
-      .referenceEnvironmentVariable('NODE_ENV')
       .defineBehavior((command) => {
         command.option('-w, --watch [watch]', 'assemble in continuous mode');
       })
@@ -44,4 +42,4 @@ const OneCommandAssemble: OnePluginHooks = {
   },
 };
 
-export default OneCommandAssemble;
+export default CommandAssemble;
