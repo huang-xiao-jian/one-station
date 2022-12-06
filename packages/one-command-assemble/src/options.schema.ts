@@ -2,6 +2,10 @@ import Joi from 'joi';
 
 const AssembleTaskSchema = Joi.object({
   /**
+   * monorepo 直接容器目录
+   */
+  workspace: Joi.string().alphanum(),
+  /**
    * 子项目工作目录路径
    */
   directory: Joi.string().alphanum(),

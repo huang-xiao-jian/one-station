@@ -1,11 +1,11 @@
 import { Injectable } from 'injection-js';
-import { ICommandAccessor } from '@one/plugin';
+import { ICommandInjection } from '@one/plugin';
 import { PivotRegistry } from './PivotRegistry';
 import { EnvironmentManager } from './EnvironmentManager';
 import { ConfigManager } from './ConfigManager';
 
 @Injectable()
-export class CommandAccessor implements ICommandAccessor {
+export class CommandInjection implements ICommandInjection {
   constructor(
     private readonly configManager: ConfigManager,
     private readonly environmentManager: EnvironmentManager,
@@ -21,7 +21,7 @@ export class CommandAccessor implements ICommandAccessor {
    * 配置文件项访问器
    */
   config<T>(name: string): T {
-    throw new Error('TODO NOT FINISHED');
+    return this.configManager.consumeConfigProperty(name);
   }
 
   /**

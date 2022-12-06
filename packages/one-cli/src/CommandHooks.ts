@@ -1,15 +1,17 @@
 import { ICommandAction, ICommandBehavior, ICommandHooks } from '@one/plugin';
-import { Command } from 'commander';
 import { isString } from 'lodash';
-import { CommandAccessor } from './CommandAccessor';
 
 export class CommandHooks implements ICommandHooks {
   // 内部存储环境变量依赖
-  private readonly environments: Set<string> = new Set();
+  readonly environments: Set<string> = new Set();
   // 内部存储配置文件字段
-  private readonly configs: Set<string> = new Set();
+  readonly configs: Set<string> = new Set();
+  // 内部存储行为定义
+  readonly behaviors: ICommandBehavior[] = [];
+  // 原则上，ACTION 必须为单一函数，后续考虑扩展开放
+  readonly actions: ICommandAction[] = [];
 
-  constructor(private readonly command: Command, private readonly accessor: CommandAccessor) {}
+  constructor(public readonly name: string, public readonly description: string) {}
 
   referenceEnvironmentVariable(names: string | string[]) {
     const dependencies = isString(names) ? [names] : names;
@@ -34,15 +36,14 @@ export class CommandHooks implements ICommandHooks {
   }
 
   defineBehavior(behavior: ICommandBehavior) {
-    behavior(this.command);
+    this.behaviors.push(behavior);
 
     return this;
   }
 
   defineAction(action: ICommandAction) {
-    // 统一匹配为异步执行上下文
-    this.command.action(async () => {
-      await action(this.accessor)(this.command);
-    });
+    this.actions.push(action);
+
+    return this;
   }
 }

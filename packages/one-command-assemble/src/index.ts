@@ -28,6 +28,7 @@ const OneCommandAssemble: OnePluginHooks = {
       .defineAction((injection) => (command) => {
         console.group('OneCommandAssemble');
         console.log('NODE_ENV:', injection.env('NODE_ENV'));
+        console.log('ASSEMBLE:', injection.config('assemble'));
         console.log('Arguments:', command.args);
         console.log('Options: ', command.opts());
         console.groupEnd();

@@ -3,6 +3,10 @@
  */
 export interface AssembleTask {
   /**
+   * monorepo 直接容器目录
+   */
+  workspace: string;
+  /**
    * 子项目工作目录路径
    */
   directory: string;

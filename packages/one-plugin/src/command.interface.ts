@@ -14,7 +14,7 @@ export interface ICommandDescriptor {
 /**
  * 命令行依赖外部数据注入
  */
-export interface ICommandAccessor {
+export interface ICommandInjection {
   /**
    * 读取环境变量
    */
@@ -38,5 +38,5 @@ export type ICommandBehavior = (command: Command) => void;
  * 命令行功能执行
  */
 export type ICommandAction = (
-  injection: ICommandAccessor,
+  injection: ICommandInjection,
 ) => (command: Command) => void | Promise<void>;
