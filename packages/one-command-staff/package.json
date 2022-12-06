@@ -1,5 +1,5 @@
 {
-  "name": "@one/command-staff",
+  "name": "@one/command-staff-toolkit",
   "version": "0.1.0",
   "description": "yet, preset toolkit for visual palette",
   "main": "lib/index.js",

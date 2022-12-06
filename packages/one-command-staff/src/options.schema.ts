@@ -9,6 +9,10 @@ export const StaffProviderSchema = Joi.object({
    * 子项目工作目录路径
    */
   directory: Joi.string().alphanum(),
+  /**
+   * 子项目静态访问前缀
+   */
+  publicPath: Joi.string(),
 });
 
 export const StaffProviderListSchema = Joi.array().items(StaffProviderSchema);

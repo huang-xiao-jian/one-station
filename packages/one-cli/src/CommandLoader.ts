@@ -1,9 +1,7 @@
-import { ICommandDescriptor, ICommandRegistry } from '@one/plugin';
 import { Inject, Injectable } from 'injection-js';
-import { CommandHooks } from './CommandHooks';
-import { isArray } from 'lodash';
 import CommandAssemble from '@one/command-assemble';
 import CommandCore from '@one/command-core';
+import CommandStaffToolkit from '@one/command-staff-toolkit';
 
 import { ConfigFileToken } from './ConfigFile';
 import type { ConfigFile } from './ConfigFile';
@@ -32,5 +30,7 @@ export class CommandLoader {
     CommandCore.onCommandInit?.(this.commandRegistry);
     CommandAssemble.onConfigInit?.(this.pivotRegistry);
     CommandAssemble.onCommandInit?.(this.commandRegistry);
+    CommandStaffToolkit.onConfigInit?.(this.pivotRegistry);
+    CommandStaffToolkit.onCommandInit?.(this.commandRegistry);
   }
 }
