@@ -30,12 +30,12 @@ const OneCommandAssemble: OnePluginHooks = {
         command.option('-w, --watch [watch]', 'assemble in continuous mode');
       })
       .defineAction((injection) => async (command) => {
-        const assembleOptionsHandler = new AssembleOptionsHandler(command, injection);
-        const tasks = await assembleOptionsHandler.handle();
-        const assembleHandler = new AssembleHandler(tasks);
+        const assembleOptionsHandler = new AssembleOptionsHandler();
+        const tasks = await assembleOptionsHandler.handle(command, injection);
+        const assembleHandler = new AssembleHandler();
 
         // 实际执行子任务
-        await assembleHandler.handle();
+        await assembleHandler.handle(tasks);
       });
   },
 };

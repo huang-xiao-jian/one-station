@@ -5,21 +5,14 @@ import { ICommandInjection } from '@one/plugin';
 import { AssembleInlineOptions, AssembleOption, AssembleTaskInternal } from './options.interface';
 
 export class AssembleOptionsHandler {
-  constructor(
-    // 子命令
-    private readonly command: Command,
-    // 外部存储
-    private readonly injection: ICommandInjection,
-  ) {}
-
   /**
    * TODO - 入参校验
    */
-  async handle(): Promise<AssembleTaskInternal[]> {
-    const outDir = this.injection.config<string>('outDir');
-    const root = this.injection.config<string>('root');
-    const inlineOptions: AssembleInlineOptions = this.command.opts();
-    const assembleOptions: AssembleOption = this.injection.config('assemble');
+  async handle(command: Command, injection: ICommandInjection): Promise<AssembleTaskInternal[]> {
+    const outDir = injection.config<string>('outDir');
+    const root = injection.config<string>('root');
+    const inlineOptions: AssembleInlineOptions = command.opts();
+    const assembleOptions: AssembleOption = injection.config('assemble');
     const tasks: AssembleTaskInternal[] = assembleOptions.tasks.map((task) => ({
       name: `${task.workspace}.${task.directory}`,
       source: path.resolve(root, task.workspace, task.directory, task.artifact),
