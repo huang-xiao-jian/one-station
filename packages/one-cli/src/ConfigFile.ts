@@ -1,6 +1,7 @@
 import assert from 'assert';
 import { cosmiconfig } from 'cosmiconfig';
 import { InjectionToken, ValueProvider } from 'injection-js';
+import { isArray } from 'lodash';
 
 export interface ConfigFile {
   /**
@@ -32,6 +33,11 @@ export async function createConfigFileProvider(): Promise<ValueProvider> {
     configuration,
     `[ConfigFileProvider] must provide useful configuration within config file`,
   );
+
+  // 插件声明为强制，否则不具备任何功能
+  const plugins = configuration['plugins'];
+
+  assert.ok(isArray(plugins), `[ConfigFileProvider] plugin property required within config file`);
 
   return {
     provide: ConfigFileToken,
