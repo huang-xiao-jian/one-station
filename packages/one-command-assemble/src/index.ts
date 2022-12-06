@@ -4,6 +4,7 @@ import { AssembleOptionSchema } from './options.schema';
 import * as path from 'path';
 import { AssembleHandler } from './AssembleHandler';
 import { AssembleOptionsHandler } from './AssembleOptionsHandler';
+import { ContinuousAssembleHandler } from './ContinuousAssembleHandler';
 
 const OneCommandAssemble: OnePluginHooks = {
   /**
@@ -30,9 +31,12 @@ const OneCommandAssemble: OnePluginHooks = {
         command.option('-w, --watch [watch]', 'assemble in continuous mode');
       })
       .defineAction((injection) => async (command) => {
+        const inlineOptions: AssembleInlineOptions = command.opts();
         const assembleOptionsHandler = new AssembleOptionsHandler();
         const tasks = await assembleOptionsHandler.handle(command, injection);
-        const assembleHandler = new AssembleHandler();
+        const assembleHandler = inlineOptions.watch
+          ? new ContinuousAssembleHandler()
+          : new AssembleHandler();
 
         // 实际执行子任务
         await assembleHandler.handle(tasks);

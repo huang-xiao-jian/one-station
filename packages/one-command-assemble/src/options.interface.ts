@@ -43,10 +43,6 @@ export interface AssembleTaskInternal {
    * 绝对路径，目标复制地址
    */
   destiny: string;
-  /**
-   * 是否持续聚合模式
-   */
-  watch?: boolean;
 }
 
 export interface AssembleOption {

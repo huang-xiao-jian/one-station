@@ -11,13 +11,11 @@ export class AssembleOptionsHandler {
   async handle(command: Command, injection: ICommandInjection): Promise<AssembleTaskInternal[]> {
     const outDir = injection.config<string>('outDir');
     const root = injection.config<string>('root');
-    const inlineOptions: AssembleInlineOptions = command.opts();
     const assembleOptions: AssembleOption = injection.config('assemble');
     const tasks: AssembleTaskInternal[] = assembleOptions.tasks.map((task) => ({
       name: `${task.workspace}.${task.directory}`,
       source: path.resolve(root, task.workspace, task.directory, task.artifact),
       destiny: path.resolve(outDir, task.assignment),
-      watch: inlineOptions.watch,
     }));
 
     // 保证输出目录存在
