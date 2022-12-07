@@ -18,7 +18,7 @@ const CommandStaffToolkit: OnePluginHooks = {
     hooks
       .registerCommand({
         name: 'st-bundle',
-        description: 'yet, bundle defined staff tasks',
+        description: 'yet, bundle designable material',
       })
       .referenceConfig('provider')
       .defineBehavior((command) => {
