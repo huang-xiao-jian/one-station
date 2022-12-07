@@ -132,6 +132,7 @@ importers:
       css-minimizer-webpack-plugin: ^4.2.2
       joi: ^17.7.0
       mini-css-extract-plugin: ^2.7.2
+      swc-loader: ^0.2.3
       terser-webpack-plugin: ^5.3.6
       typescript: ^4.9.3
       webpack: ^5.75.0
@@ -143,6 +144,7 @@ importers:
       css-minimizer-webpack-plugin: 4.2.2_webpack@5.75.0
       joi: 17.7.0
       mini-css-extract-plugin: 2.7.2_webpack@5.75.0
+      swc-loader: 0.2.3_5x5i6oqvqt377ajd6g3httdbmq
       terser-webpack-plugin: 5.3.6_5x5i6oqvqt377ajd6g3httdbmq
       webpack: 5.75.0_@swc+core@1.3.21
       webpack-chain: 6.5.1
@@ -3949,6 +3951,16 @@ packages:
       csso: 4.2.0
       picocolors: 1.0.0
       stable: 0.1.8
+    dev: false
+
+  /swc-loader/0.2.3_5x5i6oqvqt377ajd6g3httdbmq:
+    resolution: {integrity: sha512-D1p6XXURfSPleZZA/Lipb3A8pZ17fP4NObZvFCDjK/OKljroqDpPmsBdTraWhVBqUNpcWBQY1imWdoPScRlQ7A==}
+    peerDependencies:
+      '@swc/core': ^1.2.147
+      webpack: '>=2'
+    dependencies:
+      '@swc/core': 1.3.21
+      webpack: 5.75.0_@swc+core@1.3.21
     dev: false
 
   /tapable/2.2.1:
