@@ -31,5 +31,6 @@ export async function build(options: WebpackBuildOptions) {
     new AssetRulePlugin(),
     new BundleAnalyzePlugin(),
   ]);
+
   await bundler.bundle();
 }

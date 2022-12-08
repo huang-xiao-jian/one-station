@@ -1,6 +1,6 @@
 import { Injectable } from 'injection-js';
-import { s } from 'lodash';
 import { AsyncSeriesHook } from 'tapable';
+import webpack from 'webpack';
 
 import { WebpackBundlerConfig } from './WebpackBundlerConfig';
 import { WebpackBundlerInjection } from './WebpackBundlerInjection';
@@ -48,6 +48,25 @@ export class WebpackBundler {
    * 构建应用
    */
   async bundle() {
-    console.log(this.wbc.config.toConfig());
+    const compiler = webpack(this.wbc.config.toConfig());
+
+    await new Promise((resolve, reject) => {
+      compiler.run((err, stats) => {
+        if (err || stats?.hasErrors()) {
+          if (err) {
+            reject(err);
+          }
+          if (stats) {
+            reject(stats);
+          }
+        } else {
+          resolve(stats);
+        }
+
+        compiler.close(() => {
+          // nothing todo
+        });
+      });
+    });
   }
 }

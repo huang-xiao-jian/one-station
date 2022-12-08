@@ -17,11 +17,19 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
     bundler.hooks.blueprint.tapPromise('BaselinePlugin', async (wbc, wbi) => {
       wbc.hooks.initialize.tapPromise('BaselinePluginConfigInitialize', async (chain) => {
         const environment = wbi.env<Maybe<string>>('NODE_ENV');
-        const root = wbi.config<string>('root');
+        const cwd = wbi.config<string>('cwd');
         const publicPath = wbi.config<string>('publicPath');
         // 构建模式默认开发模式
         const mode = environment === 'production' ? 'production' : 'development';
 
+        /**
+         * webpack chain 相对路径存在问题，约定为 cwd 路径作为基准，暂时不可修改
+         */
+        chain.context(cwd);
+        /**
+         * 默认入口文件，暂不允许修改
+         */
+        chain.entry('main').add('./src/index.ts');
         /**
          * 生产构建模式关闭 sourcemap，不存在解析功能，开启浪费
          */
@@ -34,15 +42,18 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
          * 默认关闭 amd 风格支持
          */
         chain.set('amd', false);
+
         /**
          * 关闭 node 兼容
          */
         chain.node.set('global', false).set('__filename', false).set('__dirname', false);
+
         /**
          * 输出文件模式统一
          * TODO - 差异点在于 publicPath / outDir，由外部传入
          */
         chain.output
+          .path(path.resolve(cwd, './dist'))
           .publicPath(publicPath)
           .filename('static/[contenthash].js')
           .chunkFilename('static/[contenthash].js')
@@ -63,7 +74,7 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
           .modules.add('node_modules').end()
           // 扩展名补全严格限制，避免失控
           .extensions.merge(['.tsx', '.ts', '.jsx', '.js']).end()
-          .alias.set('@', path.resolve(root, './src')).end();
+          .alias.set('@', path.resolve(cwd, './src')).end();
 
         /**
          * 压缩关联配置

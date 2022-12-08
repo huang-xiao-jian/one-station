@@ -10,12 +10,14 @@ export class ScriptRulePlugin implements WebpackBundlerPlugin {
       wbc.hooks.initialize.tapPromise('ScriptRulePluginInitialize', async (chain) => {
         const environment = wbi.env<string>('NODE_ENV');
 
+        console.log(require.resolve('swc-loader'));
+
         chain.module
           .rule('script')
           .test(/\.(t|j)sx?$/)
           .exclude.add(/node_modules/)
           .end()
-          .use('swc-loader')
+          .use(require.resolve('swc-loader'))
           .options({
             jsc: {
               transform: {

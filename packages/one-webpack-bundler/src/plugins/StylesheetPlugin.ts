@@ -27,7 +27,7 @@ export class StylesheetPlugin implements WebpackBundlerPlugin {
         const lessrc = await wbi.configFile<LessConfiguration>('less');
 
         css.use(MiniCSSExtractPlugin.loader);
-        css.use('css-loader').options({
+        css.use(require.resolve('css-loader')).options({
           modules: {
             localIdentName: '[local]__[hash:base64:5]',
           },
@@ -36,12 +36,12 @@ export class StylesheetPlugin implements WebpackBundlerPlugin {
         const less = chain.module.rule('less').test(/\.less(\?.*)?$/);
 
         less.use(MiniCSSExtractPlugin.loader);
-        less.use('css-loader').options({
+        less.use(require.resolve('css-loader')).options({
           modules: {
             localIdentName: '[local]__[hash:base64:5]',
           },
         });
-        less.use('less-loader').options({
+        less.use(require.resolve('less-loader')).options({
           lessOptions: {
             /**
              * 配置文件优先级高，默认为激活
@@ -55,7 +55,7 @@ export class StylesheetPlugin implements WebpackBundlerPlugin {
         const sass = chain.module.rule('less').test(/\.(sass|scss)(\?.*)?$/);
 
         sass.use(MiniCSSExtractPlugin.loader);
-        sass.use('css-loader').options({
+        sass.use(require.resolve('css-loader')).options({
           modules: {
             localIdentName: '[local]__[hash:base64:5]',
             // 纯复制操作，实际原因不明
@@ -67,7 +67,7 @@ export class StylesheetPlugin implements WebpackBundlerPlugin {
             },
           },
         });
-        sass.use('sass-loader');
+        sass.use(require.resolve('sass-loader'));
 
         chain.plugin('mini-css-extract-plugin').use(MiniCSSExtractPlugin, [
           {
