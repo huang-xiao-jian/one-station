@@ -6,8 +6,8 @@ import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
 
 export class ScriptRulePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
-    bundler.hooks.blueprint.tapPromise('BaselinePlugin', async (wbc, wbs) => {
-      wbc.hooks.initialize.tapPromise('BaselinePluginConfigInitialize', async (chain) => {
+    bundler.hooks.blueprint.tapPromise('ScriptRulePlugin', async (wbc, wbs) => {
+      wbc.hooks.initialize.tapPromise('ScriptRulePluginInitialize', async (chain) => {
         const injection = wbs.request('injection');
         const environment = injection.env<string>('NODE_ENV');
 

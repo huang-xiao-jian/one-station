@@ -1,15 +1,15 @@
 /**
  * 静态资源处理
  */
-
 import BundleAnalyzerPlugin from 'webpack-bundle-analyzer';
+
 import { WebpackBundler } from '../WebpackBundler';
 import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
 
-export class AssetRulePlugin implements WebpackBundlerPlugin {
+export class BundleAnalyzePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
-    bundler.hooks.blueprint.tapPromise('BaselinePlugin', async (wbc, wbs) => {
-      wbc.hooks.initialize.tapPromise('BaselinePluginConfigInitialize', async (chain) => {
+    bundler.hooks.blueprint.tapPromise('BundleAnalyzePlugin', async (wbc, wbs) => {
+      wbc.hooks.initialize.tapPromise('BundleAnalyzePluginInitialize', async (chain) => {
         const injection = wbs.request('injection');
         const environment = injection.env<string>('ANALYZE');
 

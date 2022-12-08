@@ -6,8 +6,8 @@ import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
 
 export class AssetRulePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
-    bundler.hooks.blueprint.tapPromise('BaselinePlugin', async (wbc, wbs) => {
-      wbc.hooks.initialize.tapPromise('BaselinePluginConfigInitialize', async (chain) => {
+    bundler.hooks.blueprint.tapPromise('AssetRulePlugin', async (wbc, wbs) => {
+      wbc.hooks.initialize.tapPromise('AssetRulePluginInitialize', async (chain) => {
         const injection = wbs.request('injection');
         const rule = chain.module.rule('asset');
 

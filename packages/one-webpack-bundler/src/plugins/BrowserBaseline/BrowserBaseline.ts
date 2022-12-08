@@ -1,13 +1,13 @@
 /**
  * 浏览器应用构建基准配置
  */
+import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import path from 'node:path';
+
 import { WebpackBundler } from '../../WebpackBundler';
 import { WebpackBundlerPlugin } from '../../WebpackBundlerPlugin';
 import { BrowserBaselineDevelopmentOptimizeHandler } from './DevelopmentOptimizeHandler';
 import { BrowserBaselineProductionOptimizeHandler } from './ProductionOptimizeHandler';
-
-import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import path from 'node:path';
 
 /**
  * 浏览器环境构建模式
@@ -19,6 +19,7 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
         const injection = wbs.request('injection');
         const environment = injection.env<Maybe<string>>('NODE_ENV');
         const root = injection.config<string>('root');
+        const publicPath = injection.config<string>('publicPath');
         // 构建模式默认开发模式
         const mode = environment === 'production' ? 'production' : 'development';
 
@@ -43,6 +44,7 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
          * TODO - 差异点在于 publicPath / outDir，由外部传入
          */
         chain.output
+          .publicPath(publicPath)
           .filename('static/[contenthash].js')
           .chunkFilename('static/[contenthash].js')
           /**
@@ -55,16 +57,14 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
         /**
          * 文件定位配置 TODO - alias
          */
+        // prettier-ignore
         chain.resolve
           // 软连接激活
           .set('symlinks', true)
-          .modules.add('node_modules')
-          .end()
+          .modules.add('node_modules').end()
           // 扩展名补全严格限制，避免失控
-          .extensions.merge(['.tsx', '.ts', '.jsx', '.js'])
-          .end()
-          .alias.set('@', path.resolve(root, './src'))
-          .end();
+          .extensions.merge(['.tsx', '.ts', '.jsx', '.js']).end()
+          .alias.set('@', path.resolve(root, './src')).end();
 
         /**
          * 压缩关联配置
