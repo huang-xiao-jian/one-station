@@ -12,7 +12,7 @@ export class WebpackBundlerInjection {
   /**
    * 外源性配置文件访问器
    */
-  cosmic<T = any>(name: string): T {
+  configFile<T = any>(name: string): Promise<T> {
     throw new Error('TODO NOT FINISHED');
   }
 }
