@@ -9,6 +9,7 @@ import { WebpackBundlerInjection } from './WebpackBundlerInjection';
 import { BundleAnalyzePlugin } from './plugins/AnalyzePlugin';
 import { AssetRulePlugin } from './plugins/AssetRulePlugin';
 import { BrowserBaselinePlugin } from './plugins/BrowserBaseline/BrowserBaseline';
+import { DesignablePalettePlugin } from './plugins/DesignablePalettePlugin';
 import { ScriptRulePlugin } from './plugins/ScriptRulePlugin';
 import { StylesheetPlugin } from './plugins/StylesheetPlugin';
 
@@ -30,7 +31,16 @@ export async function build(options: WebpackBuildOptions) {
     new StylesheetPlugin(),
     new AssetRulePlugin(),
     new BundleAnalyzePlugin(),
+    // new DesignablePalettePlugin(),
   ]);
 
-  await bundler.bundle();
+  const stats = await bundler.bundle();
+
+  if (stats?.hasErrors()) {
+    console.log(stats?.toJson('errors-only'));
+
+    throw new Error('[WebpackBundler] build exception');
+  } else {
+    console.log(stats?.toString('normal'));
+  }
 }

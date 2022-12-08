@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@one/plugin": "workspace:^",
+    "@one/webpack-bundler": "workspace:^",
     "joi": "^17.7.0"
   },
   "devDependencies": {

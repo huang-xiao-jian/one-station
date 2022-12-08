@@ -1,4 +1,6 @@
-import { OnePluginHooks, ICommandRegistry, IPivotRegistry } from '@one/plugin';
+import { ICommandRegistry, IPivotRegistry, OnePluginHooks } from '@one/plugin';
+import { build } from '@one/webpack-bundler';
+
 import { StaffProviderListSchema } from './options.schema';
 
 const CommandStaffToolkit: OnePluginHooks = {
@@ -24,12 +26,15 @@ const CommandStaffToolkit: OnePluginHooks = {
       .defineBehavior((command) => {
         command.option('-d, --dry-run [dry]', 'whether working on file system');
       })
-      .defineAction((injection) => (command) => {
-        console.group('CommandStaff');
-        console.log('Configuration:', injection.config('provider'));
-        console.log('Arguments:', command.args);
-        console.log('Options: ', command.opts());
-        console.groupEnd();
+      .defineAction((injection) => async (command) => {
+        console.log({
+          root: injection.config('root'),
+        });
+        await build({
+          root: injection.config('root'),
+          cwd: process.cwd(),
+          publicPath: '/',
+        });
       });
   },
 };

@@ -1,32 +1,30 @@
 /**
  * 静态资源处理
  */
-import { WebpackBundler } from '../WebpackBundler';
-import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
+import type { WebpackBundler } from '../WebpackBundler';
+import type { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
 
 export class ScriptRulePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
     bundler.hooks.blueprint.tapPromise('ScriptRulePlugin', async (wbc, wbi) => {
       wbc.hooks.initialize.tapPromise('ScriptRulePluginInitialize', async (chain) => {
-        const environment = wbi.env<string>('NODE_ENV');
+        const script = chain.module.rule('script').test(/\.(t|j)sx?$/);
 
-        console.log(require.resolve('swc-loader'));
-
-        chain.module
-          .rule('script')
-          .test(/\.(t|j)sx?$/)
-          .exclude.add(/node_modules/)
-          .end()
-          .use(require.resolve('swc-loader'))
+        script.exclude.add(/node_modules/);
+        script
+          .use('babel-loader')
+          .loader(require.resolve('babel-loader'))
           .options({
-            jsc: {
-              transform: {
-                react: {
+            presets: [
+              [require.resolve('@babel/preset-env'), { loose: true }],
+              [
+                require.resolve('@babel/preset-react'),
+                {
                   runtime: 'automatic',
-                  refresh: environment !== 'production',
                 },
-              },
-            },
+              ],
+              [require.resolve('@babel/preset-typescript')],
+            ],
           });
       });
     });

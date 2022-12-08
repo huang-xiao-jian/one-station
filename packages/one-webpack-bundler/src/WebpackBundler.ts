@@ -1,6 +1,6 @@
 import { Injectable } from 'injection-js';
 import { AsyncSeriesHook } from 'tapable';
-import webpack from 'webpack';
+import webpack, { Stats } from 'webpack';
 
 import { WebpackBundlerConfig } from './WebpackBundlerConfig';
 import { WebpackBundlerInjection } from './WebpackBundlerInjection';
@@ -48,17 +48,22 @@ export class WebpackBundler {
    * 构建应用
    */
   async bundle() {
-    const compiler = webpack(this.wbc.config.toConfig());
+    const config = this.wbc.config.toConfig();
+    const compiler = webpack(config);
 
-    await new Promise((resolve, reject) => {
+    console.log(JSON.stringify(config.module?.rules, null, 2));
+
+    debugger;
+
+    return;
+
+    const stats = await new Promise<Maybe<Stats>>((resolve, reject) => {
       compiler.run((err, stats) => {
-        if (err || stats?.hasErrors()) {
-          if (err) {
-            reject(err);
-          }
-          if (stats) {
-            reject(stats);
-          }
+        /**
+         * 实例化阶段错误抛出，webpack 自身不抛出错误单独处理
+         */
+        if (err) {
+          reject(err);
         } else {
           resolve(stats);
         }
@@ -68,5 +73,7 @@ export class WebpackBundler {
         });
       });
     });
+
+    return stats;
   }
 }

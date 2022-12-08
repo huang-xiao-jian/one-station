@@ -29,7 +29,7 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
         /**
          * 默认入口文件，暂不允许修改
          */
-        chain.entry('main').add('./src/index.ts');
+        chain.entry('main').add(path.resolve(cwd, './src/index.ts'));
         /**
          * 生产构建模式关闭 sourcemap，不存在解析功能，开启浪费
          */

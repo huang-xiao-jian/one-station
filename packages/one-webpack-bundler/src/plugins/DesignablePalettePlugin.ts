@@ -28,8 +28,8 @@ export class DesignablePalettePlugin implements WebpackBundlerPlugin {
             filename: 'mf-entry.js',
             library: { type: 'window', name: 'zmart_tenant' },
             exposes: {
-              './components': path.resolve(root, '../src/components/index.ts'),
-              './materials': path.resolve(root, '../src/materials/index.ts'),
+              // './components': './src/components/index.ts',
+              './materials': './src/materials/index.ts',
             },
             shared: {
               react: {

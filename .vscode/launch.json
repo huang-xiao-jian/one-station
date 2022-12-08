@@ -9,7 +9,7 @@
       "request": "launch",
       "name": "Webapck Bundler",
       "skipFiles": ["<node_internals>/**"],
-      "program": "${workspaceFolder}/packages/one-webpack-bundler/src/index.ts",
+      "program": "${workspaceFolder}/packages/one-webpack-bundler/src/debug.ts",
       "preLaunchTask": "npm: build - packages/one-webpack-bundler",
       "outFiles": ["${workspaceFolder}/packages/one-webpack-bundler/lib/**"]
     }
