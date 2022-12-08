@@ -132,14 +132,18 @@ importers:
       '@types/tapable': ^2.2.2
       '@types/webpack-bundle-analyzer': ^4.6.0
       case-sensitive-paths-webpack-plugin: ^2.4.0
+      cosmiconfig: ^8.0.0
       css-minimizer-webpack-plugin: ^4.2.2
+      injection-js: ^2.4.0
       joi: ^17.7.0
       less: ^4.1.3
       less-loader: ^11.1.0
       lodash: ^4.17.21
       mini-css-extract-plugin: ^2.7.2
+      reflect-metadata: ^0.1.13
       sass-loader: ^13.2.0
       swc-loader: ^0.2.3
+      tapable: ^2.2.1
       terser-webpack-plugin: ^5.3.6
       typescript: ^4.9.3
       webpack: ^5.75.0
@@ -149,14 +153,18 @@ importers:
       '@one/plugin': link:../one-plugin
       '@swc/core': 1.3.21
       case-sensitive-paths-webpack-plugin: 2.4.0
+      cosmiconfig: 8.0.0
       css-minimizer-webpack-plugin: 4.2.2_webpack@5.75.0
+      injection-js: 2.4.0
       joi: 17.7.0
       less: 4.1.3
       less-loader: 11.1.0_less@4.1.3+webpack@5.75.0
       lodash: 4.17.21
       mini-css-extract-plugin: 2.7.2_webpack@5.75.0
+      reflect-metadata: 0.1.13
       sass-loader: 13.2.0_webpack@5.75.0
       swc-loader: 0.2.3_5x5i6oqvqt377ajd6g3httdbmq
+      tapable: 2.2.1
       terser-webpack-plugin: 5.3.6_5x5i6oqvqt377ajd6g3httdbmq
       webpack: 5.75.0_@swc+core@1.3.21
       webpack-bundle-analyzer: 4.7.0

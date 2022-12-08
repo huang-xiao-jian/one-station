@@ -1,7 +1,6 @@
 /**
  * 静态资源处理
  */
-
 import { isNil } from 'lodash';
 import MiniCSSExtractPlugin from 'mini-css-extract-plugin';
 
@@ -22,11 +21,10 @@ interface LessConfiguration {
 
 export class StylesheetPlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
-    bundler.hooks.blueprint.tapPromise('StylesheetPlugin', async (wbc, wbs) => {
+    bundler.hooks.blueprint.tapPromise('StylesheetPlugin', async (wbc, wbi) => {
       wbc.hooks.initialize.tapPromise('StylesheetPluginInitialize', async (chain) => {
-        const injection = wbs.request('injection');
         const css = chain.module.rule('css').test(/\.css(\?.*)?$/);
-        const lessrc = await injection.configFile<LessConfiguration>('less');
+        const lessrc = await wbi.configFile<LessConfiguration>('less');
 
         css.use(MiniCSSExtractPlugin.loader);
         css.use('css-loader').options({

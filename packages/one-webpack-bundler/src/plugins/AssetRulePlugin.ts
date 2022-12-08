@@ -6,9 +6,8 @@ import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
 
 export class AssetRulePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
-    bundler.hooks.blueprint.tapPromise('AssetRulePlugin', async (wbc, wbs) => {
+    bundler.hooks.blueprint.tapPromise('AssetRulePlugin', async (wbc, wbi) => {
       wbc.hooks.initialize.tapPromise('AssetRulePluginInitialize', async (chain) => {
-        const injection = wbs.request('injection');
         const rule = chain.module.rule('asset');
 
         /**
@@ -16,7 +15,7 @@ export class AssetRulePlugin implements WebpackBundlerPlugin {
          */
         rule
           .oneOf('image')
-          .test(/\.(bmp|gif|jpg|jpeg|png|gif|woff2?|eot|ttf|otf)(\?.*)?)$/)
+          .test(/\.(bmp|gif|jpg|jpeg|png|gif|woff2?|eot|ttf|otf)(\?.*)?$/)
           // @ts-ignore
           .type('asset')
           .parser({

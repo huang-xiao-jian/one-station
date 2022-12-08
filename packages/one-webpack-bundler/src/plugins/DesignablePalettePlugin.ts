@@ -1,17 +1,17 @@
 /**
  * VP 物料定制插件
  */
-import { container } from 'webpack';
 import * as path from 'node:path';
+import { container } from 'webpack';
+
 import { WebpackBundler } from '../WebpackBundler';
 import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
 
 export class DesignablePalettePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
-    bundler.hooks.blueprint.tapPromise('DesignablePalettePlugin', async (wbc, wbs) => {
+    bundler.hooks.blueprint.tapPromise('DesignablePalettePlugin', async (wbc, wbi) => {
       wbc.hooks.initialize.tapPromise('DesignablePalettePluginInitialize', async (chain) => {
-        const injection = wbs.request('injection');
-        const root = injection.config<string>('root');
+        const root = wbi.config<string>('root');
 
         /**
          * 参数目前固定，考虑后续如何进行迭代

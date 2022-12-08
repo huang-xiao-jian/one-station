@@ -14,12 +14,11 @@ import { BrowserBaselineProductionOptimizeHandler } from './ProductionOptimizeHa
  */
 export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
-    bundler.hooks.blueprint.tapPromise('BaselinePlugin', async (wbc, wbs) => {
+    bundler.hooks.blueprint.tapPromise('BaselinePlugin', async (wbc, wbi) => {
       wbc.hooks.initialize.tapPromise('BaselinePluginConfigInitialize', async (chain) => {
-        const injection = wbs.request('injection');
-        const environment = injection.env<Maybe<string>>('NODE_ENV');
-        const root = injection.config<string>('root');
-        const publicPath = injection.config<string>('publicPath');
+        const environment = wbi.env<Maybe<string>>('NODE_ENV');
+        const root = wbi.config<string>('root');
+        const publicPath = wbi.config<string>('publicPath');
         // 构建模式默认开发模式
         const mode = environment === 'production' ? 'production' : 'development';
 
@@ -73,7 +72,7 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
           mode === 'development'
             ? new BrowserBaselineDevelopmentOptimizeHandler()
             : new BrowserBaselineProductionOptimizeHandler();
-        optimizer.handle(chain, injection);
+        optimizer.handle(chain, wbi);
 
         /**
          * 基准插件配置

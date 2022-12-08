@@ -8,10 +8,9 @@ import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
 
 export class BundleAnalyzePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
-    bundler.hooks.blueprint.tapPromise('BundleAnalyzePlugin', async (wbc, wbs) => {
+    bundler.hooks.blueprint.tapPromise('BundleAnalyzePlugin', async (wbc, wbi) => {
       wbc.hooks.initialize.tapPromise('BundleAnalyzePluginInitialize', async (chain) => {
-        const injection = wbs.request('injection');
-        const environment = injection.env<string>('ANALYZE');
+        const environment = wbi.env<string>('ANALYZE');
 
         // 环境变量默认为字符串类型
         if (environment === 'true') {
