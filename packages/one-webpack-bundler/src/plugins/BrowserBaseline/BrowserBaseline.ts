@@ -7,6 +7,7 @@ import { BrowserBaselineDevelopmentOptimizeHandler } from './DevelopmentOptimize
 import { BrowserBaselineProductionOptimizeHandler } from './ProductionOptimizeHandler';
 
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
+import path from 'node:path';
 
 /**
  * 浏览器环境构建模式
@@ -17,6 +18,7 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
       wbc.hooks.initialize.tapPromise('BaselinePluginConfigInitialize', async (chain) => {
         const injection = wbs.request('injection');
         const environment = injection.env<Maybe<string>>('NODE_ENV');
+        const root = injection.config<string>('root');
         // 构建模式默认开发模式
         const mode = environment === 'production' ? 'production' : 'development';
 
@@ -60,6 +62,8 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
           .end()
           // 扩展名补全严格限制，避免失控
           .extensions.merge(['.tsx', '.ts', '.jsx', '.js'])
+          .end()
+          .alias.set('@', path.resolve(root, './src'))
           .end();
 
         /**

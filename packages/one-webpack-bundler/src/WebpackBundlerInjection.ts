@@ -10,6 +10,13 @@ export class WebpackBundlerInjection {
   }
 
   /**
+   * 用户配置
+   */
+  config<T>(name: string): T {
+    throw new Error('TODO NOT FINISHED');
+  }
+
+  /**
    * 外源性配置文件访问器
    */
   configFile<T = any>(name: string): Promise<T> {
