@@ -27,9 +27,9 @@ const CommandStaffToolkit: OnePluginHooks = {
         command.option('-d, --dry-run [dry]', 'whether working on file system');
       })
       .defineAction((injection) => async (command) => {
-        console.log({
-          root: injection.config('root'),
-        });
+        // 构建核心环境变量，TODO
+        process.env.NODE_ENV = 'production';
+
         await build({
           root: injection.config('root'),
           cwd: process.cwd(),

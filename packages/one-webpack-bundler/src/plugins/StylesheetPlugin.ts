@@ -26,7 +26,7 @@ export class StylesheetPlugin implements WebpackBundlerPlugin {
         const css = chain.module.rule('css').test(/\.css(\?.*)?$/);
         const lessrc = await wbi.configFile<LessConfiguration>('less');
 
-        css.use('MiniCSSExtractPlugin.loader').loader(MiniCSSExtractPlugin.loader);
+        css.use('MiniCSSExtractPlugin').loader(MiniCSSExtractPlugin.loader);
         css
           .use('css-loader')
           .loader(require.resolve('css-loader'))
@@ -38,7 +38,7 @@ export class StylesheetPlugin implements WebpackBundlerPlugin {
 
         const less = chain.module.rule('less').test(/\.less(\?.*)?$/);
 
-        less.use('MiniCSSExtractPlugin.loader').loader(MiniCSSExtractPlugin.loader);
+        less.use('MiniCSSExtractPlugin').loader(MiniCSSExtractPlugin.loader);
         less
           .use('css-loader')
           .loader(require.resolve('css-loader'))
@@ -64,7 +64,7 @@ export class StylesheetPlugin implements WebpackBundlerPlugin {
 
         const sass = chain.module.rule('sass').test(/\.(sass|scss)(\?.*)?$/);
 
-        sass.use('MiniCSSExtractPlugin.loader').loader(MiniCSSExtractPlugin.loader);
+        sass.use('MiniCSSExtractPlugin').loader(MiniCSSExtractPlugin.loader);
         sass
           .use('css-loader')
           .loader(require.resolve('css-loader'))

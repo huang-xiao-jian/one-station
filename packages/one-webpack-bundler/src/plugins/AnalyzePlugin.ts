@@ -13,7 +13,7 @@ export class BundleAnalyzePlugin implements WebpackBundlerPlugin {
         const environment = wbi.env<string>('ANALYZE');
 
         // 环境变量默认为字符串类型
-        if (environment === 'true') {
+        chain.when(environment === 'true', (chain) => {
           chain.plugin('webpack-bundle-analyzer').use(BundleAnalyzerPlugin, [
             // https://github.com/webpack-contrib/webpack-bundle-analyzer
             {
@@ -23,7 +23,7 @@ export class BundleAnalyzePlugin implements WebpackBundlerPlugin {
               defaultSizes: 'parsed',
             },
           ]);
-        }
+        });
       });
     });
   }

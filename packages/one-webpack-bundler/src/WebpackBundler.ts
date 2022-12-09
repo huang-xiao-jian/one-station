@@ -25,7 +25,7 @@ export class WebpackBundler {
   /**
    * 插件集合，外部传入，内部仅负责插件调度
    */
-  readonly plugins: WebpackBundlerPlugin[] = [];
+  private readonly plugins: WebpackBundlerPlugin[] = [];
 
   constructor(
     private readonly wbc: WebpackBundlerConfig,
@@ -33,11 +33,18 @@ export class WebpackBundler {
   ) {}
 
   /**
+   * 插件聚合
+   */
+  provide(plugins: WebpackBundlerPlugin[]) {
+    this.plugins.push(...plugins);
+  }
+
+  /**
    * 插件体系调度
    */
-  async warmUp(plugins: WebpackBundlerPlugin[]) {
-    // 插件声明
-    plugins.forEach((plugin) => plugin.apply(this));
+  async warmUp() {
+    // 插件执行
+    this.plugins.forEach((plugin) => plugin.apply(this));
     // 插件体系 blueprint 环节注册
     await this.hooks.blueprint.promise(this.wbc, this.wbi);
     // config 插件关联插件调用
@@ -50,12 +57,6 @@ export class WebpackBundler {
   async bundle() {
     const config = this.wbc.config.toConfig();
     const compiler = webpack(config);
-
-    console.log(JSON.stringify(config.module?.rules, null, 2));
-
-    debugger;
-
-    return;
 
     const stats = await new Promise<Maybe<Stats>>((resolve, reject) => {
       compiler.run((err, stats) => {

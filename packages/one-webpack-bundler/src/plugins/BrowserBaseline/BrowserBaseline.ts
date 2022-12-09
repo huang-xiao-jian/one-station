@@ -33,7 +33,15 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
         /**
          * 生产构建模式关闭 sourcemap，不存在解析功能，开启浪费
          */
-        chain.devtool(mode === 'development' ? 'cheap-module-source-map' : false);
+        chain.when(
+          mode === 'development',
+          (chain) => {
+            chain.devtool('cheap-module-source-map');
+          },
+          (chain) => {
+            chain.devtool(false);
+          },
+        );
         /**
          * 仅支持 web 构建模式，简化配置
          */

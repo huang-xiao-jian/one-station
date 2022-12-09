@@ -1,7 +1,8 @@
+import type { JsMinifyOptions as SwcMinifyOptions } from '@swc/core';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
-import type { JsMinifyOptions as SwcMinifyOptions } from '@swc/core';
 import WebpackChain from 'webpack-chain';
+
 import { WebpackBundlerInjection } from '../../WebpackBundlerInjection';
 
 export class BrowserBaselineProductionOptimizeHandler {
@@ -20,6 +21,10 @@ export class BrowserBaselineProductionOptimizeHandler {
     chain.optimization.minimizer('swc-css').use(CssMinimizerPlugin, [
       {
         minify: CssMinimizerPlugin.lightningCssMinify,
+        /**
+         * TODO - 并发构建，影响 lightingcss 加载，后续进行修复
+         */
+        parallel: false,
         minimizerOptions: {
           preset: [
             'default',
