@@ -1,5 +1,3 @@
-import 'reflect-metadata';
-
 import { isArray } from 'lodash';
 
 import { WebpackBuildOptions } from './BuildOptions';
@@ -7,7 +5,7 @@ import { WebpackBundler } from './WebpackBundler';
 import { collectPlugins } from './collector';
 import { createInjector } from './injector';
 
-export async function build(options: WebpackBuildOptions) {
+export async function config(options: WebpackBuildOptions) {
   const injector = createInjector(options);
   const bundler: WebpackBundler = injector.get(WebpackBundler);
   const plugins = collectPlugins();
@@ -19,13 +17,5 @@ export async function build(options: WebpackBuildOptions) {
 
   await bundler.warmUp();
 
-  const stats = await bundler.bundle();
-
-  if (stats?.hasErrors()) {
-    console.log(stats?.toJson('errors-only'));
-
-    throw new Error('[WebpackBundler] build exception');
-  } else {
-    console.log(stats?.toString('normal'));
-  }
+  return bundler.toConfig();
 }

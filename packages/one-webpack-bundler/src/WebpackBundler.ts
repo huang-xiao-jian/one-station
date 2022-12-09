@@ -52,10 +52,18 @@ export class WebpackBundler {
   }
 
   /**
+   * 临时逃生窗口，
+   * 配置高度依赖插件体系设计，无法满足抽离配置需求
+   */
+  async toConfig() {
+    return this.wbc.config.toConfig();
+  }
+
+  /**
    * 构建应用
    */
   async bundle() {
-    const config = this.wbc.config.toConfig();
+    const config = await this.toConfig();
     const compiler = webpack(config);
 
     const stats = await new Promise<Maybe<Stats>>((resolve, reject) => {
