@@ -1,6 +1,6 @@
+import { IConfigTransformMaterial, IPivotRegistry, OnePluginHooks } from '@one/plugin';
 import Joi from 'joi';
 import path from 'path';
-import { OnePluginHooks, IPivotRegistry, IConfigTransformMaterial } from '@one/plugin';
 
 const OneCommandCore: OnePluginHooks = {
   onConfigInit(hooks: IPivotRegistry) {

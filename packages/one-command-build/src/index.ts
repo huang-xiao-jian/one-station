@@ -1,16 +1,15 @@
 import { ICommandRegistry, IPivotRegistry, OnePluginHooks } from '@one/plugin';
 import { build } from '@one/webpack-bundler';
+import Joi from 'joi';
 
-import { StaffProviderListSchema } from './options.schema';
-
-const CommandStaffToolkit: OnePluginHooks = {
+const SingletonCommandBuild: OnePluginHooks = {
   /**
    * 注册外部依赖
    */
   onConfigInit(hooks: IPivotRegistry) {
     hooks.registerConfig({
-      key: 'provider',
-      schema: StaffProviderListSchema,
+      key: 'publicPath',
+      schema: Joi.string(),
     });
   },
   /**
@@ -19,24 +18,28 @@ const CommandStaffToolkit: OnePluginHooks = {
   onCommandInit(hooks: ICommandRegistry) {
     hooks
       .registerCommand({
-        name: 'st-bundle',
-        description: 'yet, bundle designable material',
+        name: 'st-build',
+        description: 'yet, bundle single designable material',
       })
-      .referenceConfig('provider')
+      .referenceConfig(['publicPath'])
       .defineBehavior((command) => {
-        command.option('-d, --dry-run [dry]', 'whether working on file system');
+        // TODO
       })
       .defineAction((injection) => async (command) => {
         // 构建核心环境变量，TODO
         process.env.NODE_ENV = 'production';
 
+        // 配置读取
+        const root = injection.config('root');
+        const publicPath = injection.config('publicPath');
+
         await build({
-          root: injection.config('root'),
+          root,
+          publicPath,
           cwd: process.cwd(),
-          publicPath: '/',
         });
       });
   },
 };
 
-export default CommandStaffToolkit;
+export default SingletonCommandBuild;

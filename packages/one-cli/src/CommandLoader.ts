@@ -1,12 +1,12 @@
-import { Inject, Injectable } from 'injection-js';
 import CommandAssemble from '@one/command-assemble';
+import CommandBatchBuild from '@one/command-batch-build';
 import CommandCore from '@one/command-core';
-import CommandStaffToolkit from '@one/command-staff-toolkit';
+import { Inject, Injectable } from 'injection-js';
 
+import { CommandRegistry } from './CommandRegistry';
 import { ConfigFileToken } from './ConfigFile';
 import type { ConfigFile } from './ConfigFile';
 import { PivotRegistry } from './PivotRegistry';
-import { CommandRegistry } from './CommandRegistry';
 
 /**
  * 命令行注册中心，标准单例模式
@@ -30,7 +30,7 @@ export class CommandLoader {
     CommandCore.onCommandInit?.(this.commandRegistry);
     CommandAssemble.onConfigInit?.(this.pivotRegistry);
     CommandAssemble.onCommandInit?.(this.commandRegistry);
-    CommandStaffToolkit.onConfigInit?.(this.pivotRegistry);
-    CommandStaffToolkit.onCommandInit?.(this.commandRegistry);
+    CommandBatchBuild.onConfigInit?.(this.pivotRegistry);
+    CommandBatchBuild.onCommandInit?.(this.commandRegistry);
   }
 }

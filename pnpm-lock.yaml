@@ -31,8 +31,8 @@ importers:
   packages/one-cli:
     specifiers:
       '@one/command-assemble': workspace:^
+      '@one/command-batch-build': workspace:^
       '@one/command-core': workspace:^
-      '@one/command-staff-toolkit': workspace:^
       '@one/plugin': workspace:^
       '@types/lodash': ^4.14.191
       commander: ^9.4.1
@@ -44,8 +44,8 @@ importers:
       typescript: ^4.9.3
     dependencies:
       '@one/command-assemble': link:../one-command-assemble
+      '@one/command-batch-build': link:../one-command-batch-build
       '@one/command-core': link:../one-command-core
-      '@one/command-staff-toolkit': link:../one-command-staff
       '@one/plugin': link:../one-plugin
       commander: 9.4.1
       cosmiconfig: 8.0.0
@@ -78,18 +78,24 @@ importers:
       '@types/fs-extra': 9.0.13
       typescript: 4.9.3
 
-  packages/one-command-core:
+  packages/one-command-batch-build:
     specifiers:
       '@one/plugin': workspace:^
+      '@one/webpack-bundler': workspace:^
+      '@types/lodash': ^4.14.191
       joi: ^17.7.0
+      lodash: ^4.17.21
       typescript: ^4.9.3
     dependencies:
       '@one/plugin': link:../one-plugin
+      '@one/webpack-bundler': link:../one-webpack-bundler
       joi: 17.7.0
+      lodash: 4.17.21
     devDependencies:
+      '@types/lodash': 4.14.191
       typescript: 4.9.3
 
-  packages/one-command-staff:
+  packages/one-command-build:
     specifiers:
       '@one/plugin': workspace:^
       '@one/webpack-bundler': workspace:^
@@ -98,6 +104,17 @@ importers:
     dependencies:
       '@one/plugin': link:../one-plugin
       '@one/webpack-bundler': link:../one-webpack-bundler
+      joi: 17.7.0
+    devDependencies:
+      typescript: 4.9.3
+
+  packages/one-command-core:
+    specifiers:
+      '@one/plugin': workspace:^
+      joi: ^17.7.0
+      typescript: ^4.9.3
+    dependencies:
+      '@one/plugin': link:../one-plugin
       joi: 17.7.0
     devDependencies:
       typescript: 4.9.3
