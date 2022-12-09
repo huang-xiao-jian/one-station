@@ -4,8 +4,8 @@
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
 import path from 'node:path';
 
-import { WebpackBundler } from '../../WebpackBundler';
-import { WebpackBundlerPlugin } from '../../WebpackBundlerPlugin';
+import { WebpackBundler } from '../../internal/WebpackBundler';
+import { WebpackBundlerPlugin } from '../../internal/WebpackBundlerPlugin';
 import { BrowserBaselineDevelopmentOptimizeHandler } from './DevelopmentOptimizeHandler';
 import { BrowserBaselineProductionOptimizeHandler } from './ProductionOptimizeHandler';
 

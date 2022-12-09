@@ -1,7 +1,7 @@
 import { ProgressPlugin } from 'webpack';
 
-import { WebpackBundler } from '../WebpackBundler';
-import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
+import { WebpackBundler } from '../internal/WebpackBundler';
+import { WebpackBundlerPlugin } from '../internal/WebpackBundlerPlugin';
 
 export class ProgressSmoothPlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {

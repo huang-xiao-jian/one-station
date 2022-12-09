@@ -4,8 +4,8 @@
 import { isNil } from 'lodash';
 import MiniCSSExtractPlugin from 'mini-css-extract-plugin';
 
-import { WebpackBundler } from '../WebpackBundler';
-import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
+import { WebpackBundler } from '../internal/WebpackBundler';
+import { WebpackBundlerPlugin } from '../internal/WebpackBundlerPlugin';
 
 /**
  * 裁剪入参，仅包含优先可调参数

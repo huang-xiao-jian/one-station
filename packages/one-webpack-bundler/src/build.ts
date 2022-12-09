@@ -2,10 +2,10 @@ import 'reflect-metadata';
 
 import { isArray } from 'lodash';
 
-import { WebpackBuildOptions } from './BuildOptions';
-import { WebpackBundler } from './WebpackBundler';
 import { collectPlugins } from './collector';
 import { createInjector } from './injector';
+import { WebpackBuildOptions } from './internal/BuildOptions';
+import { WebpackBundler } from './internal/WebpackBundler';
 
 export async function build(options: WebpackBuildOptions) {
   const injector = createInjector(options);

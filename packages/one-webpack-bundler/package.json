@@ -19,6 +19,7 @@
     "@babel/preset-react": "^7.18.6",
     "@babel/preset-typescript": "^7.18.6",
     "@one/plugin": "workspace:^",
+    "@pmmmwh/react-refresh-webpack-plugin": "^0.5.10",
     "@swc/core": "^1.3.21",
     "babel-loader": "^9.1.0",
     "case-sensitive-paths-webpack-plugin": "^2.4.0",

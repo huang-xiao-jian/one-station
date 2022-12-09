@@ -1,11 +1,7 @@
-/**
- * VP 物料定制插件
- */
-import * as path from 'node:path';
 import { container } from 'webpack';
 
-import { WebpackBundler } from '../WebpackBundler';
-import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
+import { WebpackBundler } from '../internal/WebpackBundler';
+import { WebpackBundlerPlugin } from '../internal/WebpackBundlerPlugin';
 
 export class DesignablePalettePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {

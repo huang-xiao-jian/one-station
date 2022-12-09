@@ -1,8 +1,5 @@
-/**
- * 静态资源处理
- */
-import type { WebpackBundler } from '../WebpackBundler';
-import type { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
+import type { WebpackBundler } from '../internal/WebpackBundler';
+import { WebpackBundlerPlugin } from '../internal/WebpackBundlerPlugin';
 
 export class ScriptRulePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {

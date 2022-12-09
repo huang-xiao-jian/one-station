@@ -1,9 +1,9 @@
 import { ReflectiveInjector } from 'injection-js';
 
-import { WebpackBuildOptions, WebpackBuildOptionsToken } from './BuildOptions';
-import { WebpackBundler } from './WebpackBundler';
-import { WebpackBundlerConfig } from './WebpackBundlerConfig';
-import { WebpackBundlerInjection } from './WebpackBundlerInjection';
+import { WebpackBuildOptions, WebpackBuildOptionsToken } from './internal/BuildOptions';
+import { WebpackBundler } from './internal/WebpackBundler';
+import { WebpackBundlerConfig } from './internal/WebpackBundlerConfig';
+import { WebpackBundlerInjection } from './internal/WebpackBundlerInjection';
 
 export function createInjector(options: WebpackBuildOptions): ReflectiveInjector {
   const injector = ReflectiveInjector.resolveAndCreate([

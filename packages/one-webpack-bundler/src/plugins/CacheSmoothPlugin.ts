@@ -1,8 +1,8 @@
 /**
  * TODO - 构建缓存
  */
-import { WebpackBundler } from '../WebpackBundler';
-import { WebpackBundlerPlugin } from '../WebpackBundlerPlugin';
+import { WebpackBundler } from '../internal/WebpackBundler';
+import { WebpackBundlerPlugin } from '../internal/WebpackBundlerPlugin';
 
 export class CacheSmoothPlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {

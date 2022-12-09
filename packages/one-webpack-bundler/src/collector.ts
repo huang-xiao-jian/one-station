@@ -1,4 +1,4 @@
-import { WebpackBundlerPlugin } from './WebpackBundlerPlugin';
+import { WebpackBundlerPlugin } from './internal/WebpackBundlerPlugin';
 import { BundleAnalyzePlugin } from './plugins/AnalyzePlugin';
 import { AssetRulePlugin } from './plugins/AssetRulePlugin';
 import { BrowserBaselinePlugin } from './plugins/BrowserBaseline/BrowserBaseline';
@@ -6,6 +6,7 @@ import { DesignablePalettePlugin } from './plugins/DesignablePalettePlugin';
 import { MomentSmoothPlugin } from './plugins/MomentSmoothPlugin';
 import { ProgressSmoothPlugin } from './plugins/ProgressSmoothPlugin';
 import { ScriptRulePlugin } from './plugins/ScriptRulePlugin';
+import { ServeSmoothPlugin } from './plugins/ServeSmoothPlugin';
 import { StylesheetPlugin } from './plugins/StylesheetPlugin';
 
 export function collectPlugins(): WebpackBundlerPlugin[] {
@@ -18,5 +19,6 @@ export function collectPlugins(): WebpackBundlerPlugin[] {
     new MomentSmoothPlugin(),
     new ProgressSmoothPlugin(),
     new DesignablePalettePlugin(),
+    new ServeSmoothPlugin(),
   ];
 }
