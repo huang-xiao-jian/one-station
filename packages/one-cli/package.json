@@ -17,6 +17,7 @@
     "@one/command-assemble": "workspace:^",
     "@one/command-core": "workspace:^",
     "@one/command-build": "workspace:^",
+    "@one/command-serve": "workspace:^",
     "@one/plugin": "workspace:^",
     "commander": "^9.4.1",
     "cosmiconfig": "^8.0.0",

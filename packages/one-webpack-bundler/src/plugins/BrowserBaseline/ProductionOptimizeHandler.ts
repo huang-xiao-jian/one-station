@@ -1,3 +1,4 @@
+import type { Maybe } from '@one/experiment-support';
 import type { JsMinifyOptions as SwcMinifyOptions } from '@swc/core';
 import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';

@@ -32,6 +32,7 @@ export async function build(options: WebpackBuildOptions) {
   // 入参插件优先级更高，调用顺序靠后
   bundler.provide(isArray(options.plugins) ? options.plugins : []);
 
+  // 插件实际调用
   await bundler.warmUp();
 
   const stats = await bundler.bundle();

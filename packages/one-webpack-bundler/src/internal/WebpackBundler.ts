@@ -1,6 +1,8 @@
+import type { Maybe } from '@one/experiment-support';
 import { Injectable } from 'injection-js';
 import { AsyncSeriesHook } from 'tapable';
 import webpack, { Stats } from 'webpack';
+import WebpackDevServer from 'webpack-dev-server';
 
 import { WebpackBundlerConfig } from './WebpackBundlerConfig';
 import { WebpackBundlerInjection } from './WebpackBundlerInjection';
@@ -84,5 +86,22 @@ export class WebpackBundler {
     });
 
     return stats;
+  }
+
+  /**
+   * 开发模式服务器
+   */
+  async serve() {
+    const config = await this.toConfig();
+    const compiler = webpack(config);
+    const server = new WebpackDevServer(
+      {
+        ...config.devServer,
+      },
+      compiler,
+    );
+
+    // 暂定不掺杂任何冗余操作
+    await server.start();
   }
 }

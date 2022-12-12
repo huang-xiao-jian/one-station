@@ -1,6 +1,7 @@
 import CommandAssemble from '@one/command-assemble';
 import CommandBuild from '@one/command-build';
 import CommandCore from '@one/command-core';
+import CommandServe from '@one/command-serve';
 import { Inject, Injectable } from 'injection-js';
 
 import { CommandRegistry } from './CommandRegistry';

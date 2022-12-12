@@ -1,8 +1,9 @@
 /**
  * 浏览器应用构建基准配置
  */
+import type { Maybe } from '@one/experiment-support';
 import CaseSensitivePathsPlugin from 'case-sensitive-paths-webpack-plugin';
-import path from 'node:path';
+import path from 'path';
 
 import { WebpackBundler } from '../../internal/WebpackBundler';
 import { WebpackBundlerPlugin } from '../../internal/WebpackBundlerPlugin';

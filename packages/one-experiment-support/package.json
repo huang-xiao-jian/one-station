@@ -1,0 +1,11 @@
+{
+  "name": "@one/experiment-support",
+  "version": "0.1.0",
+  "description": "yet, unify convenient type support",
+  "keywords": [],
+  "author": "jian.huang",
+  "license": "ISC",
+  "types": "index.ts",
+  "dependencies": {},
+  "devDependencies": {}
+}
