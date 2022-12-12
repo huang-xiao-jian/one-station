@@ -33,5 +33,7 @@ export class CommandLoader {
     CommandAssemble.onCommandInit?.(this.commandRegistry);
     CommandBuild.onConfigInit?.(this.pivotRegistry);
     CommandBuild.onCommandInit?.(this.commandRegistry);
+    CommandServe.onConfigInit?.(this.pivotRegistry);
+    CommandServe.onCommandInit?.(this.commandRegistry);
   }
 }

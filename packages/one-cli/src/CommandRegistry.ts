@@ -1,5 +1,7 @@
 import { ICommandDescriptor, ICommandRegistry } from '@one/plugin';
+import assert from 'assert';
 import { Injectable } from 'injection-js';
+
 import { CommandHooks } from './CommandHooks';
 
 /**
@@ -20,6 +22,17 @@ export class CommandRegistry implements ICommandRegistry {
 
     // 保存注册记录
     this.commands.set(cmd.name, command);
+
+    return command;
+  }
+
+  /**
+   * 中转命令行定义
+   */
+  provideCommand(name: string): CommandHooks {
+    const command = this.commands.get(name);
+
+    assert.ok(command, `[CommandRegistry] missing command definition for ${name}`);
 
     return command;
   }
