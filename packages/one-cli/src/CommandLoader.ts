@@ -1,5 +1,5 @@
 import CommandAssemble from '@one/command-assemble';
-import CommandBatchBuild from '@one/command-batch-build';
+import CommandBuild from '@one/command-build';
 import CommandCore from '@one/command-core';
 import { Inject, Injectable } from 'injection-js';
 
@@ -30,7 +30,7 @@ export class CommandLoader {
     CommandCore.onCommandInit?.(this.commandRegistry);
     CommandAssemble.onConfigInit?.(this.pivotRegistry);
     CommandAssemble.onCommandInit?.(this.commandRegistry);
-    CommandBatchBuild.onConfigInit?.(this.pivotRegistry);
-    CommandBatchBuild.onCommandInit?.(this.commandRegistry);
+    CommandBuild.onConfigInit?.(this.pivotRegistry);
+    CommandBuild.onCommandInit?.(this.commandRegistry);
   }
 }

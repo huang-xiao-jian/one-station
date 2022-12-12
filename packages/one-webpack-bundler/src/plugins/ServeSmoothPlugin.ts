@@ -19,14 +19,12 @@ export class ServeSmoothPlugin implements WebpackBundlerPlugin {
             'Access-Control-Allow-Methods': 'GET, POST, PUT, DELETE, PATCH, OPTIONS',
             'Access-Control-Allow-Headers': 'X-Requested-With, content-type, Authorization',
           });
-
           chain.devServer.set('client', {
             overlay: {
               errors: true,
               warnings: false,
             },
           });
-
           chain.plugin('ReactRefreshWebpackPlugin').use(ReactRefreshWebpackPlugin, [
             {
               overlay: false,

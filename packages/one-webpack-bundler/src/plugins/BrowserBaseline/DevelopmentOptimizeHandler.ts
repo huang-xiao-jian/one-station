@@ -1,5 +1,6 @@
 import WebpackChain from 'webpack-chain';
-import { WebpackBundlerInjection } from '../../WebpackBundlerInjection';
+
+import { WebpackBundlerInjection } from '../../internal/WebpackBundlerInjection';
 
 /**
  * 开发模式关闭压缩即可

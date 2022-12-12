@@ -31,7 +31,7 @@ importers:
   packages/one-cli:
     specifiers:
       '@one/command-assemble': workspace:^
-      '@one/command-batch-build': workspace:^
+      '@one/command-build': workspace:^
       '@one/command-core': workspace:^
       '@one/plugin': workspace:^
       '@types/lodash': ^4.14.191
@@ -44,7 +44,7 @@ importers:
       typescript: ^4.9.3
     dependencies:
       '@one/command-assemble': link:../one-command-assemble
-      '@one/command-batch-build': link:../one-command-batch-build
+      '@one/command-build': link:../one-command-build
       '@one/command-core': link:../one-command-core
       '@one/plugin': link:../one-plugin
       commander: 9.4.1
@@ -166,6 +166,7 @@ importers:
       lightningcss: ^1.17.1
       lodash: ^4.17.21
       mini-css-extract-plugin: ^2.7.2
+      react-refresh: ^0.14.0
       reflect-metadata: ^0.1.13
       sass: ^1.56.1
       sass-loader: ^13.2.0
@@ -180,7 +181,7 @@ importers:
       '@babel/preset-react': 7.18.6
       '@babel/preset-typescript': 7.18.6
       '@one/plugin': link:../one-plugin
-      '@pmmmwh/react-refresh-webpack-plugin': 0.5.10_webpack@5.75.0
+      '@pmmmwh/react-refresh-webpack-plugin': 0.5.10_xsftmjzvfioxqs4ify53ibh7ay
       '@swc/core': 1.3.21
       babel-loader: 9.1.0_webpack@5.75.0
       case-sensitive-paths-webpack-plugin: 2.4.0
@@ -194,6 +195,7 @@ importers:
       lightningcss: 1.17.1
       lodash: 4.17.21
       mini-css-extract-plugin: 2.7.2_webpack@5.75.0
+      react-refresh: 0.14.0
       reflect-metadata: 0.1.13
       sass: 1.56.1
       sass-loader: 13.2.0_sass@1.56.1+webpack@5.75.0
@@ -1759,7 +1761,7 @@ packages:
       rimraf: 2.7.1
     dev: true
 
-  /@pmmmwh/react-refresh-webpack-plugin/0.5.10_webpack@5.75.0:
+  /@pmmmwh/react-refresh-webpack-plugin/0.5.10_xsftmjzvfioxqs4ify53ibh7ay:
     resolution: {integrity: sha512-j0Ya0hCFZPd4x40qLzbhGsh9TMtdb+CJQiso+WxLOPNasohq9cc5SNUcwsZaRH6++Xh91Xkm/xHCkuIiIu0LUA==}
     engines: {node: '>= 10.13'}
     peerDependencies:
@@ -1792,6 +1794,7 @@ packages:
       find-up: 5.0.0
       html-entities: 2.3.3
       loader-utils: 2.0.4
+      react-refresh: 0.14.0
       schema-utils: 3.1.1
       source-map: 0.7.4
       webpack: 5.75.0_@swc+core@1.3.21
@@ -5072,6 +5075,11 @@ packages:
   /react-is/16.13.1:
     resolution: {integrity: sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==}
     dev: true
+
+  /react-refresh/0.14.0:
+    resolution: {integrity: sha512-wViHqhAd8OHeLS/IRMJjTSDHF3U9eWi62F/MledQGPdJGDhodXJ9PBLNGr6WWL7qlH12Mt3TyTpbS+hGXMjCzQ==}
+    engines: {node: '>=0.10.0'}
+    dev: false
 
   /read-pkg-up/3.0.0:
     resolution: {integrity: sha512-YFzFrVvpC6frF1sz8psoHDBGF7fLPc+llq/8NB43oagqWkx8ar5zYtsTORtOjw9W2RHLpWP+zTWwBvf1bCmcSw==}

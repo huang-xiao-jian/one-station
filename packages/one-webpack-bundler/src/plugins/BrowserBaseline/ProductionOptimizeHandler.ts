@@ -3,7 +3,7 @@ import CssMinimizerPlugin from 'css-minimizer-webpack-plugin';
 import TerserPlugin from 'terser-webpack-plugin';
 import WebpackChain from 'webpack-chain';
 
-import { WebpackBundlerInjection } from '../../WebpackBundlerInjection';
+import { WebpackBundlerInjection } from '../../internal/WebpackBundlerInjection';
 
 export class BrowserBaselineProductionOptimizeHandler {
   handle(chain: WebpackChain, injection: WebpackBundlerInjection) {
