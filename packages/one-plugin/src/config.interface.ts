@@ -63,18 +63,3 @@ export interface ICosmiConfigDescriptor {
    */
   schema: Schema;
 }
-
-export interface IPivotRegistry {
-  /**
-   * 注册统一配置文件属性
-   */
-  registerConfig: (config: IConfigDescriptor) => void;
-  /**
-   * 注册 cosmic 风格配置依赖
-   */
-  registerCosmiConfig: (config: ICosmiConfigDescriptor) => void;
-  /**
-   * 注册环境变量声明
-   */
-  registerEnvironmentVariable: (environment: IEnvironmentVariableDescriptor) => void;
-}

@@ -1,5 +1,5 @@
 {
-  "name": "@one/command-core",
+  "name": "@one/plugin-core",
   "version": "0.1.0",
   "description": "yet, builtIn plugin collection",
   "scripts": {
@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "@one/plugin": "workspace:^",
+    "@one/plugin-runner": "workspace:^",
     "joi": "^17.7.0"
   },
   "devDependencies": {

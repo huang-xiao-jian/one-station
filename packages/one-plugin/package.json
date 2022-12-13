@@ -4,6 +4,10 @@
   "description": "yet, plugin system engine",
   "types": "src/index.ts",
   "keywords": [],
+  "scripts": {
+    "dev": "tsc --watch",
+    "build": "tsc"
+  },
   "author": "jian.huang",
   "license": "ISC",
   "dependencies": {

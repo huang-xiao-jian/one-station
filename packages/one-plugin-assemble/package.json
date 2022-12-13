@@ -1,5 +1,5 @@
 {
-  "name": "@one/command-assemble",
+  "name": "@one/plugin-assemble",
   "version": "0.1.0",
   "description": "yet, assemble plugin to aggregate artifacts",
   "main": "lib/index.js",
@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@one/plugin": "workspace:^",
+    "@one/plugin-runner": "workspace:^",
     "chalk": "^5.1.2",
     "chokidar": "^3.5.3",
     "commander": "^9.4.1",

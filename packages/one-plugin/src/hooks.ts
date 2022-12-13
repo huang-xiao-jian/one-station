@@ -1,13 +1,44 @@
-import { ICommandRegistry } from './registry.interface';
-import { IPivotRegistry } from './config.interface';
+import { ICommandDescriptor, ICommandHooks, IReferenceInjection } from './command.interface';
+import {
+  IConfigDescriptor,
+  ICosmiConfigDescriptor,
+  IEnvironmentVariableDescriptor,
+} from './config.interface';
 
-export interface OnePluginHooks {
+export interface OneHandlerMapping {}
+
+export interface OnePluginApi {
   /**
-   * 配置内容扫描阶段，声明配置内容
+   * 核心功能导出
    */
-  onConfigInit?: (hooks: IPivotRegistry) => void;
+  injection: IReferenceInjection;
   /**
-   * 命令行声明
+   * 导出功能函数，函数必须为异步函数
    */
-  onCommandInit?: (hooks: ICommandRegistry) => void;
+  registerHandler: (name: string, handler: (...args: any[]) => Promise<any>) => void;
+  /**
+   * TODO - 消费内部注册服务
+   */
+  consumeHandler: <N extends keyof OneHandlerMapping>(
+    name: N,
+    args: Parameters<OneHandlerMapping[N]>,
+  ) => ReturnType<OneHandlerMapping[N]>;
+  /**
+   * 被动模式注册命令行
+   */
+  registerCommand: (cmd: ICommandDescriptor) => ICommandHooks;
+  /**
+   * 注册统一配置文件属性
+   */
+  registerConfig: (config: IConfigDescriptor) => void;
+  /**
+   * 注册 cosmic 风格配置依赖
+   */
+  registerCosmiConfig: (config: ICosmiConfigDescriptor) => void;
+  /**
+   * 注册环境变量声明
+   */
+  registerEnvironmentVariable: (environment: IEnvironmentVariableDescriptor) => void;
 }
+
+export type OnePlugin = (api: OnePluginApi) => any;
