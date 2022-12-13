@@ -15,6 +15,7 @@
   "license": "ISC",
   "dependencies": {
     "@one/plugin": "workspace:^",
+    "@one/plugin-runner": "workspace:^",
     "commander": "^9.4.1",
     "cosmiconfig": "^8.0.0",
     "injection-js": "^2.4.0",

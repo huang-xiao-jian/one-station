@@ -6,7 +6,7 @@ import { ContinuousAssembleHandler } from './ContinuousAssembleHandler';
 import { AssembleInlineOptions, AssembleTaskInternal } from './options.interface';
 import { AssembleOptionSchema } from './options.schema';
 
-declare module '@one/plugin' {
+declare global {
   interface OneHandlerMapping {
     'assemble:once': (tasks: AssembleTaskInternal[]) => Promise<void>;
     'assemble:watch': (tasks: AssembleTaskInternal[]) => Promise<void>;
