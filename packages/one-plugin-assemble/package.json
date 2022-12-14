@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "description": "yet, assemble plugin to aggregate artifacts",
   "main": "lib/index.js",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "tsc"
   },
   "keywords": [],
   "author": "jian.huang",
