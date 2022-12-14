@@ -9,20 +9,7 @@ import {
  * 内建指令集中声明
  */
 declare global {
-  interface OneHandlerMapping {
-    /**
-     * 读取环境变量
-     */
-    'env:read': <R extends string>(name: string) => R;
-    /**
-     * 读取文件配置内容
-     */
-    'config:read': (name: string) => any;
-    /**
-     * 读取外源配置文件内容
-     */
-    'cosmic:read': (name: string) => any;
-  }
+  interface OneHandlerMapping {}
 }
 
 export interface OnePluginApi {
@@ -45,9 +32,17 @@ export interface OnePluginApi {
    */
   registerCommand: (cmd: ICommandDescriptor) => ICommandHooks;
   /**
+   * 调用注册子命令
+   */
+  consumeCommand: (name: string) => Promise<any>;
+  /**
    * 注册统一配置文件属性
    */
   registerConfig: (config: IConfigDescriptor) => void;
+  /**
+   * 调用注册子命令
+   */
+  consumeConfig: (name: string) => any;
   /**
    * 注册 cosmic 风格配置依赖
    */
@@ -56,6 +51,10 @@ export interface OnePluginApi {
    * 注册环境变量声明
    */
   registerEnvironmentVariable: (environment: IEnvironmentVariableDescriptor) => void;
+  /**
+   * 访问环境变量
+   */
+  consumeEnvironmentVariable: (name: string) => Promise<any>;
 }
 
 export type OnePlugin = (api: OnePluginApi) => any;

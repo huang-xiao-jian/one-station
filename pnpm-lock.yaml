@@ -31,6 +31,7 @@ importers:
   packages/one-cli:
     specifiers:
       '@one/plugin': workspace:^
+      '@one/plugin-assemble': workspace:^
       '@one/plugin-runner': workspace:^
       '@types/lodash': ^4.14.191
       commander: ^9.4.1
@@ -42,6 +43,7 @@ importers:
       typescript: ^4.9.3
     dependencies:
       '@one/plugin': link:../one-plugin
+      '@one/plugin-assemble': link:../one-plugin-assemble
       '@one/plugin-runner': link:../one-plugin-runner
       commander: 9.4.1
       cosmiconfig: 8.0.0

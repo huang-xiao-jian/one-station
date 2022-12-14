@@ -50,12 +50,20 @@ export default createOnePlugin((api) => {
     })
     .referenceConfig(['root', 'ourDir', 'assemble'])
     .defineBehavior((command) => {
-      command.option('-w, --watch [watch]', 'assemble in continuous mode');
+      command
+        .option('-w, --watch [watch]', 'assemble in continuous mode')
+        .option('--no-clean', 'cleanup output directory before assemble');
     })
     .defineAction(async (command) => {
-      const assembleOptionsHandler = new AssembleOptionsHandler();
+      /**
+       * 命令行标准处理流程：
+       *   - 参数预处理（按摩需求收集）
+       *   - 工作环境预热（技师准备原材料、房间）
+       *   - 功能执行
+       */
+      const assembleOptionsHandler = new AssembleOptionsHandler(api);
       const inlineOptions: AssembleInlineOptions = command.opts();
-      const tasks = await assembleOptionsHandler.handle(api);
+      const tasks = await assembleOptionsHandler.handle(inlineOptions);
 
       // 实际执行子任务
       inlineOptions.watch

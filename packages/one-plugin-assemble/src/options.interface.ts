@@ -2,6 +2,10 @@
  * 命令行传参
  */
 export interface AssembleInlineOptions {
+  /**
+   * 聚合产物前是否清理目录，默认 TRUE
+   */
+  clean: boolean;
   watch?: boolean;
 }
 

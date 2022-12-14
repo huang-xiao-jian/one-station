@@ -3,7 +3,7 @@ import { createOnePlugin } from '@one/plugin-runner';
 import Joi from 'joi';
 import path from 'path';
 
-export default createOnePlugin((api) => {
+export const OnePluginCore = createOnePlugin((api) => {
   /**
    * 推荐设置为项目根目录
    */
