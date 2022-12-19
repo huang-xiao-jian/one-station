@@ -8,8 +8,9 @@ import { AssembleOptionSchema } from './options.schema';
 
 declare global {
   interface OneHandlerMapping {
-    'assemble:once': (tasks: AssembleTaskInternal[]) => Promise<void>;
-    'assemble:watch': (tasks: AssembleTaskInternal[]) => Promise<void>;
+    'assemble:once': (options: AssembleInlineOptions) => Promise<void>;
+    'assemble:watch': (options: AssembleInlineOptions) => Promise<void>;
+    'assemble:options': (options: AssembleInlineOptions) => Promise<AssembleTaskInternal[]>;
   }
 }
 
@@ -23,10 +24,21 @@ export default createOnePlugin((api) => {
   });
 
   /**
+   * 参数内部处理
+   */
+  api.registerHandler('assemble:options', async (options) => {
+    const handler = new AssembleOptionsHandler(api);
+    const tasks = await handler.handle(options);
+
+    return tasks;
+  });
+
+  /**
    * 导出核心功能，一次性聚合产物
    */
-  api.registerHandler('assemble:once', async (tasks: AssembleTaskInternal[]) => {
+  api.registerHandler('assemble:once', async (options) => {
     const handler = new AssembleHandler();
+    const tasks = await api.consumeHandler('assemble:options', [options]);
 
     await handler.handle(tasks);
   });
@@ -34,8 +46,9 @@ export default createOnePlugin((api) => {
   /**
    * 导出核心功能，持续聚合产物
    */
-  api.registerHandler('assemble:watch', async (tasks: AssembleTaskInternal[]) => {
+  api.registerHandler('assemble:watch', async (options) => {
     const handler = new ContinuousAssembleHandler();
+    const tasks = await api.consumeHandler('assemble:options', [options]);
 
     await handler.handle(tasks);
   });
@@ -61,13 +74,11 @@ export default createOnePlugin((api) => {
        *   - 工作环境预热（技师准备原材料、房间）
        *   - 功能执行
        */
-      const assembleOptionsHandler = new AssembleOptionsHandler(api);
       const inlineOptions: AssembleInlineOptions = command.opts();
-      const tasks = await assembleOptionsHandler.handle(inlineOptions);
 
       // 实际执行子任务
       inlineOptions.watch
-        ? await api.consumeHandler('assemble:watch', [tasks])
-        : await api.consumeHandler('assemble:once', [tasks]);
+        ? await api.consumeHandler('assemble:watch', [inlineOptions])
+        : await api.consumeHandler('assemble:once', [inlineOptions]);
     });
 });
