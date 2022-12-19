@@ -55,23 +55,6 @@ importers:
       '@types/lodash': 4.14.191
       typescript: 4.9.3
 
-  packages/one-command-batch-build:
-    specifiers:
-      '@one/plugin': workspace:^
-      '@one/webpack-bundler': workspace:^
-      '@types/lodash': ^4.14.191
-      joi: ^17.7.0
-      lodash: ^4.17.21
-      typescript: ^4.9.3
-    dependencies:
-      '@one/plugin': link:../one-plugin
-      '@one/webpack-bundler': link:../one-webpack-bundler
-      joi: 17.7.0
-      lodash: 4.17.21
-    devDependencies:
-      '@types/lodash': 4.14.191
-      typescript: 4.9.3
-
   packages/one-command-build:
     specifiers:
       '@one/plugin': workspace:^
@@ -151,6 +134,19 @@ importers:
       '@one/plugin': workspace:^
     dependencies:
       '@one/plugin': link:../one-plugin
+
+  packages/one-plugin-serve:
+    specifiers:
+      '@one/plugin': workspace:^
+      '@one/plugin-runner': workspace:^
+      joi: ^17.7.0
+      typescript: ^4.9.3
+    dependencies:
+      '@one/plugin': link:../one-plugin
+      '@one/plugin-runner': link:../one-plugin-runner
+      joi: 17.7.0
+    devDependencies:
+      typescript: 4.9.3
 
   packages/one-webpack-bundler:
     specifiers:
