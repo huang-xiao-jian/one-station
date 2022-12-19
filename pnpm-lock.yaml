@@ -32,8 +32,8 @@ importers:
     specifiers:
       '@one/plugin': workspace:^
       '@one/plugin-assemble': workspace:^
-      '@one/plugin-build': workspace:^
       '@one/plugin-runner': workspace:^
+      '@one/plugin-staff': workspace:^
       '@types/lodash': ^4.14.191
       commander: ^9.4.1
       cosmiconfig: ^8.0.0
@@ -45,8 +45,8 @@ importers:
     dependencies:
       '@one/plugin': link:../one-plugin
       '@one/plugin-assemble': link:../one-plugin-assemble
-      '@one/plugin-build': link:../one-plugin-build
       '@one/plugin-runner': link:../one-plugin-runner
+      '@one/plugin-staff': link:../one-plugin-staff
       commander: 9.4.1
       cosmiconfig: 8.0.0
       injection-js: 2.4.0
@@ -55,30 +55,6 @@ importers:
       reflect-metadata: 0.1.13
     devDependencies:
       '@types/lodash': 4.14.191
-      typescript: 4.9.3
-
-  packages/one-command-serve:
-    specifiers:
-      '@one/plugin': workspace:^
-      '@one/webpack-bundler': workspace:^
-      joi: ^17.7.0
-      typescript: ^4.9.3
-    dependencies:
-      '@one/plugin': link:../one-plugin
-      '@one/webpack-bundler': link:../one-webpack-bundler
-      joi: 17.7.0
-    devDependencies:
-      typescript: 4.9.3
-
-  packages/one-command-union:
-    specifiers:
-      '@one/plugin': workspace:^
-      joi: ^17.7.0
-      typescript: ^4.9.3
-    dependencies:
-      '@one/plugin': link:../one-plugin
-      joi: 17.7.0
-    devDependencies:
       typescript: 4.9.3
 
   packages/one-experiment-support:
@@ -118,7 +94,26 @@ importers:
       '@types/fs-extra': 9.0.13
       typescript: 4.9.3
 
-  packages/one-plugin-build:
+  packages/one-plugin-runner:
+    specifiers:
+      '@one/plugin': workspace:^
+    dependencies:
+      '@one/plugin': link:../one-plugin
+
+  packages/one-plugin-simulate:
+    specifiers:
+      '@one/plugin': workspace:^
+      '@one/plugin-runner': workspace:^
+      joi: ^17.7.0
+      typescript: ^4.9.3
+    dependencies:
+      '@one/plugin': link:../one-plugin
+      '@one/plugin-runner': link:../one-plugin-runner
+      joi: 17.7.0
+    devDependencies:
+      typescript: 4.9.3
+
+  packages/one-plugin-staff:
     specifiers:
       '@one/plugin': workspace:^
       '@one/plugin-runner': workspace:^
@@ -129,25 +124,6 @@ importers:
       '@one/plugin': link:../one-plugin
       '@one/plugin-runner': link:../one-plugin-runner
       '@one/webpack-bundler': link:../one-webpack-bundler
-      joi: 17.7.0
-    devDependencies:
-      typescript: 4.9.3
-
-  packages/one-plugin-runner:
-    specifiers:
-      '@one/plugin': workspace:^
-    dependencies:
-      '@one/plugin': link:../one-plugin
-
-  packages/one-plugin-serve:
-    specifiers:
-      '@one/plugin': workspace:^
-      '@one/plugin-runner': workspace:^
-      joi: ^17.7.0
-      typescript: ^4.9.3
-    dependencies:
-      '@one/plugin': link:../one-plugin
-      '@one/plugin-runner': link:../one-plugin-runner
       joi: 17.7.0
     devDependencies:
       typescript: 4.9.3

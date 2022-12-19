@@ -1,9 +1,9 @@
 {
-  "name": "@one/plugin-build",
+  "name": "@one/plugin-simulate",
   "version": "0.1.0",
-  "description": "yet, preset toolkit for visual palette",
+  "description": "yet, toolkit for simulate serve purpose",
   "main": "lib/index.js",
-  "types": "src/index.ts",
+  "types": "lib/index.d.ts",
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc"
@@ -14,7 +14,6 @@
   "dependencies": {
     "@one/plugin": "workspace:^",
     "@one/plugin-runner": "workspace:^",
-    "@one/webpack-bundler": "workspace:^",
     "joi": "^17.7.0"
   },
   "devDependencies": {
