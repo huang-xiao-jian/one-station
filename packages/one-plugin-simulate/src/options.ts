@@ -1,15 +1,43 @@
-import Joi from 'joi';
-
-export interface CommandServeOptions {
+/**
+ * 命令行传参
+ */
+export interface InlineSimulateOptions {
   /**
-   * 开发模式 publicPath 配置
+   * 是否开启 CORS，默认开启
    */
-  publicPath: string;
+  cors: boolean;
+  /**
+   * 是否开启反向代理，默认开启
+   */
+  proxy: boolean;
+  /**
+   * 是否开启接口模拟，暂时默认不开启
+   */
+  mock: boolean;
+  /**
+   * 预览服务器端口
+   */
+  port?: number;
 }
 
-export const CommandServeOptionsSchema = Joi.object({
+/**
+ * 预览服务器选项
+ */
+export interface SimulateOptions extends Omit<InlineSimulateOptions, 'port'> {
   /**
-   * 开发模式配置项
+   * 静态文件根目录，暂定单目录模式
    */
-  publicPath: Joi.string(),
-});
+  rootDir: string;
+  /**
+   * 预览服务器监听模式，默认 http 模式
+   */
+  protocol: string;
+  /**
+   * 预览服务器监听域名
+   */
+  host: string;
+  /**
+   * 确定性预览服务器端口
+   */
+  port: number;
+}

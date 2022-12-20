@@ -1,4 +1,5 @@
 import OnePluginAssemble from '@one/plugin-assemble';
+import OnePluginSimulate from '@one/plugin-simulate';
 import OnePluginStaff from '@one/plugin-staff';
 import { Injectable } from 'injection-js';
 
@@ -26,5 +27,6 @@ export class CommandLoader {
     OnePluginCore(this.platform);
     OnePluginAssemble(this.platform);
     OnePluginStaff(this.platform);
+    OnePluginSimulate(this.platform);
   }
 }

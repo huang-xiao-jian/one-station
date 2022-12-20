@@ -21,6 +21,7 @@
     "@one/plugin": "workspace:^",
     "@one/plugin-runner": "workspace:^",
     "@one/plugin-assemble": "workspace:^",
+    "@one/plugin-simulate": "workspace:^",
     "@one/plugin-staff": "workspace:^",
     "commander": "^9.4.1",
     "cosmiconfig": "^8.0.0",
