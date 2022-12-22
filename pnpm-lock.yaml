@@ -118,6 +118,7 @@ importers:
       connect-history-api-fallback: ^2.0.0
       cors: ^2.8.5
       express: ^4.18.2
+      express-urlrewrite: ^2.0.0
       injection-js: ^2.4.0
       joi: ^17.7.0
       lodash: ^4.17.21
@@ -135,6 +136,7 @@ importers:
       connect-history-api-fallback: 2.0.0
       cors: 2.8.5
       express: 4.18.2
+      express-urlrewrite: 2.0.0
       injection-js: 2.4.0
       joi: 17.7.0
       lodash: 4.17.21
@@ -3727,6 +3729,15 @@ packages:
       homedir-polyfill: 1.0.3
     dev: true
 
+  /express-urlrewrite/2.0.0:
+    resolution: {integrity: sha512-WU2wariBmEDEVMf+uK3tLbTISQFC8yQ0Wy0tx+KCSs5g1tM+FPClG3bUBtACT4VDyAZrkZEh9lMQX5R9Vfv3Eg==}
+    dependencies:
+      debug: 4.3.4
+      path-to-regexp: 6.2.1
+    transitivePeerDependencies:
+      - supports-color
+    dev: false
+
   /express/4.18.2:
     resolution: {integrity: sha512-5/PsL6iGPdfQ/lKM1UuielYgv3BUoJfz1aUwU9vHZ+J7gyvwdQXFEBIEIaxeGf0GIcreATNyBExtalisDbuMqQ==}
     engines: {node: '>= 0.10.0'}
@@ -5329,6 +5340,10 @@ packages:
 
   /path-to-regexp/0.1.7:
     resolution: {integrity: sha512-5DFkuoqlv1uYQKxy8omFBeJPQcdoE07Kv2sferDCrAq1ohOU+MSDswDIbnx3YAM60qIOnYa53wBhXW0EbMonrQ==}
+    dev: false
+
+  /path-to-regexp/6.2.1:
+    resolution: {integrity: sha512-JLyh7xT1kizaEvcaXOQwOc2/Yhw6KZOvPf1S8401UyLk86CU79LN3vl7ztXGm/pZ+YjoyAJ4rxmHwbkBXJX+yw==}
     dev: false
 
   /path-type/3.0.0:

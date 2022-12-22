@@ -9,6 +9,7 @@ import assert from 'assert';
 import { createCommand } from 'commander';
 import { Inject, Injectable } from 'injection-js';
 import Joi from 'joi';
+import { get } from 'lodash';
 import { isFunction, isNil } from 'lodash';
 
 import { CommandHooks } from './CommandHooks';
@@ -98,7 +99,8 @@ export class OnePlatform implements OnePluginApi {
 
     assert(descriptor);
 
-    const originalConfigValue = this.configFile.configuration[name];
+    // 支持嵌套属性
+    const originalConfigValue = get(this.configFile.configuration, name);
 
     if (isNil(originalConfigValue)) {
       if (!isNil(descriptor.default)) {

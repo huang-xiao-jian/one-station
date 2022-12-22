@@ -25,6 +25,16 @@ export interface InlineSimulateOptions {
 }
 
 /**
+ * 适配需要路径重写，例如租户路径重定向，方便测试
+ *
+ * @link - https://www.npmjs.com/package/express-urlrewrite
+ */
+export interface URLRewriteRule {
+  from: string;
+  to: string;
+}
+
+/**
  * 预览服务器选项
  */
 export interface SimulateOptions extends Omit<InlineSimulateOptions, 'port'> {
@@ -48,4 +58,8 @@ export interface SimulateOptions extends Omit<InlineSimulateOptions, 'port'> {
    * 是否激活浏览器 History 路由模式
    */
   historyApiFallback: boolean;
+  /**
+   * 路径重写规则
+   */
+  rewriteRules: URLRewriteRule[];
 }

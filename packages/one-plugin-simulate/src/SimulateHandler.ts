@@ -2,6 +2,7 @@ import compression from 'compression';
 import history from 'connect-history-api-fallback';
 import cors from 'cors';
 import express from 'express';
+import rewrite from 'express-urlrewrite';
 import http from 'http';
 import morgan from 'morgan';
 import path from 'path';
@@ -13,6 +14,13 @@ export class SimulateHandler {
   async serve(options: SimulateOptions) {
     const app = express();
     const { default: chalk } = await import('chalk');
+
+    /**
+     * URL 重写优先级最高
+     */
+    options.rewriteRules.forEach((rewriteRule) => {
+      app.use(rewrite(rewriteRule.from, rewriteRule.to));
+    });
 
     /**
      * request

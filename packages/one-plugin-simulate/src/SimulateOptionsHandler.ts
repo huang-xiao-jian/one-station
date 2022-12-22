@@ -3,7 +3,7 @@ import { Injectable } from 'injection-js';
 import { toNumber } from 'lodash';
 import { getPortPromise } from 'portfinder';
 
-import { InlineSimulateOptions, SimulateOptions } from './options';
+import { InlineSimulateOptions, SimulateOptions, URLRewriteRule } from './options';
 
 export class SimulateOptionsHandler {
   constructor(private readonly api: OnePluginApi) {}
@@ -13,6 +13,7 @@ export class SimulateOptionsHandler {
    */
   async handle(inlineOptions: InlineSimulateOptions): Promise<SimulateOptions> {
     const outDir: string = this.api.consumeConfig('outDir');
+    const rewriteRules: URLRewriteRule[] = this.api.consumeConfig('simulate.rewrites');
     const port = inlineOptions.port
       ? toNumber(inlineOptions.port)
       : await getPortPromise({
@@ -25,6 +26,7 @@ export class SimulateOptionsHandler {
       protocol: 'http',
       host: '0.0.0.0',
       port,
+      rewriteRules,
       cors: inlineOptions.cors,
       mock: inlineOptions.mock,
       proxy: inlineOptions.proxy,

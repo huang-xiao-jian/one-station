@@ -6,8 +6,18 @@ import { createOnePlugin } from '@one/plugin-runner';
 import { SimulateHandler } from './SimulateHandler';
 import { SimulateOptionsHandler } from './SimulateOptionsHandler';
 import { InlineSimulateOptions } from './options';
+import { URLRewriteRuleSchema } from './schema';
 
 export default createOnePlugin((api) => {
+  /**
+   * 注册参数
+   */
+  api.registerConfig({
+    key: 'simulate.rewrites',
+    default: [],
+    schema: URLRewriteRuleSchema,
+  });
+
   /**
    * 注册核心指令
    */
