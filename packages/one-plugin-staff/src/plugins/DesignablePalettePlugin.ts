@@ -1,12 +1,10 @@
+import { WebpackBundler, WebpackBundlerPlugin } from '@one/webpack-bundler';
 import { container } from 'webpack';
-
-import { WebpackBundler } from '../internal/WebpackBundler';
-import { WebpackBundlerPlugin } from '../internal/WebpackBundlerPlugin';
 
 export class DesignablePalettePlugin implements WebpackBundlerPlugin {
   apply(bundler: WebpackBundler) {
     bundler.hooks.blueprint.tapPromise('DesignablePalettePlugin', async (wbc, wbi) => {
-      wbc.hooks.initialize.tapPromise('DesignablePalettePluginInitialize', async (chain) => {
+      wbc.hooks.adjustment.tapPromise('DesignablePalettePluginAdjustment', async (chain) => {
         const root = wbi.config<string>('root');
 
         /**

@@ -1,8 +1,5 @@
-import type { Maybe } from '@one/experiment-support';
 import { Injectable } from 'injection-js';
 import { AsyncSeriesHook } from 'tapable';
-import webpack, { Stats } from 'webpack';
-import WebpackDevServer from 'webpack-dev-server';
 
 import { WebpackBundlerConfig } from './WebpackBundlerConfig';
 import { WebpackBundlerInjection } from './WebpackBundlerInjection';
@@ -38,19 +35,22 @@ export class WebpackBundler {
    * 插件聚合
    */
   provide(plugins: WebpackBundlerPlugin[]) {
+    // 暂且保留入参插件集合
     this.plugins.push(...plugins);
+    // 插件注册
+    this.plugins.forEach((plugin) => plugin.apply(this));
   }
 
   /**
    * 插件体系调度
    */
   async warmUp() {
-    // 插件执行
-    this.plugins.forEach((plugin) => plugin.apply(this));
     // 插件体系 blueprint 环节注册
     await this.hooks.blueprint.promise(this.wbc, this.wbi);
     // config 插件关联插件调用
     await this.wbc.hooks.initialize.promise(this.wbc.config);
+    await this.wbc.hooks.adjustment.promise(this.wbc.config);
+    await this.wbc.hooks.enhancement.promise(this.wbc.config);
   }
 
   /**
@@ -59,49 +59,5 @@ export class WebpackBundler {
    */
   async toConfig() {
     return this.wbc.config.toConfig();
-  }
-
-  /**
-   * 构建应用
-   */
-  async bundle() {
-    const config = await this.toConfig();
-    const compiler = webpack(config);
-
-    const stats = await new Promise<Maybe<Stats>>((resolve, reject) => {
-      compiler.run((err, stats) => {
-        /**
-         * 实例化阶段错误抛出，webpack 自身不抛出错误单独处理
-         */
-        if (err) {
-          reject(err);
-        } else {
-          resolve(stats);
-        }
-
-        compiler.close(() => {
-          // nothing todo
-        });
-      });
-    });
-
-    return stats;
-  }
-
-  /**
-   * 开发模式服务器
-   */
-  async serve() {
-    const config = await this.toConfig();
-    const compiler = webpack(config);
-    const server = new WebpackDevServer(
-      {
-        ...config.devServer,
-      },
-      compiler,
-    );
-
-    // 暂定不掺杂任何冗余操作
-    await server.start();
   }
 }

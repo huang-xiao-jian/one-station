@@ -1,6 +1,9 @@
 import { createOnePlugin } from '@one/plugin-runner';
-import { build } from '@one/webpack-bundler';
 import Joi from 'joi';
+
+import { BuildHandler } from './handler/Handler';
+import { BuildOptionsHandler } from './handler/OptionsHandler';
+import { InlineOptions } from './options';
 
 export default createOnePlugin((api) => {
   /**
@@ -21,23 +24,17 @@ export default createOnePlugin((api) => {
     })
     .referenceConfig(['publicPath'])
     .defineBehavior((command) => {
-      // TODO - check useful options
-      // command
-      //   .option('-w, --watch [watch]', 'assemble in continuous mode')
-      //   .option('--no-clean', 'cleanup output directory before assemble');
+      command.option('-w, --watch', 'build in continuous mode');
     })
     .defineAction(async (command) => {
       // 环境变量设置
       process.env.NODE_ENV = 'production';
 
-      // 配置读取
-      const root: string = api.consumeConfig('root');
-      const publicPath = api.consumeConfig('publicPath');
+      const inlineOptions: InlineOptions = command.opts();
+      const buildOptionsHandler = new BuildOptionsHandler(api);
+      const config = await buildOptionsHandler.handle(inlineOptions);
+      const buildHandler = new BuildHandler();
 
-      await build({
-        root,
-        publicPath,
-        cwd: process.cwd(),
-      });
+      await buildHandler.handle(config);
     });
 });

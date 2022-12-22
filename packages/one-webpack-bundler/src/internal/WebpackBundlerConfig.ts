@@ -3,8 +3,11 @@ import { AsyncSeriesHook } from 'tapable';
 import WebpackChain from 'webpack-chain';
 
 export interface WebpackBundlerConfigHooks {
+  // 内建构建配置，优先级最低
   initialize: AsyncSeriesHook<WebpackChain>;
-  aggregation: AsyncSeriesHook<WebpackChain>;
+  // 内置配置微调，优先级次之
+  adjustment: AsyncSeriesHook<WebpackChain>;
+  // 配置对象增强，例如考虑后续 MFSU 引入，优先级最高，调用顺序最后
   enhancement: AsyncSeriesHook<WebpackChain>;
 }
 
@@ -15,7 +18,7 @@ export class WebpackBundlerConfig {
    */
   readonly hooks: WebpackBundlerConfigHooks = {
     initialize: new AsyncSeriesHook(['chain']),
-    aggregation: new AsyncSeriesHook(['chain']),
+    adjustment: new AsyncSeriesHook(['chain']),
     enhancement: new AsyncSeriesHook(['chain']),
   };
 

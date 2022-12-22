@@ -1,6 +1,7 @@
 import 'reflect-metadata';
 
 import { isArray } from 'lodash';
+import webpack, { Stats } from 'webpack';
 
 import { createInjector } from './injector';
 import { WebpackBuildOptions } from './internal/BuildOptions';
@@ -8,7 +9,6 @@ import { WebpackBundler } from './internal/WebpackBundler';
 import { BundleAnalyzePlugin } from './plugins/AnalyzePlugin';
 import { AssetRulePlugin } from './plugins/AssetRulePlugin';
 import { BrowserBaselinePlugin } from './plugins/BrowserBaseline/BrowserBaseline';
-import { DesignablePalettePlugin } from './plugins/DesignablePalettePlugin';
 import { MomentSmoothPlugin } from './plugins/MomentSmoothPlugin';
 import { ProgressSmoothPlugin } from './plugins/ProgressSmoothPlugin';
 import { ScriptRulePlugin } from './plugins/ScriptRulePlugin';
@@ -27,7 +27,6 @@ export async function build(options: WebpackBuildOptions) {
     new BundleAnalyzePlugin(),
     new MomentSmoothPlugin(),
     new ProgressSmoothPlugin(),
-    new DesignablePalettePlugin(),
   ]);
   // 入参插件优先级更高，调用顺序靠后
   bundler.provide(isArray(options.plugins) ? options.plugins : []);
@@ -35,13 +34,34 @@ export async function build(options: WebpackBuildOptions) {
   // 插件实际调用
   await bundler.warmUp();
 
-  const stats = await bundler.bundle();
+  const config = await bundler.toConfig();
+  const compiler = webpack(config);
 
-  if (stats?.hasErrors()) {
-    console.log(stats?.toJson('errors-only'));
+  // 插件实际调用
+  await bundler.warmUp();
 
-    throw new Error('[WebpackBundler] build exception');
+  if (options.watch) {
+    compiler.watch(config.watchOptions || {}, (err, stats) => {
+      console.log(stats?.toString('normal'));
+    });
   } else {
-    console.log(stats?.toString('normal'));
+    compiler.run((err, stats) => {
+      /**
+       * 实例化阶段错误抛出，webpack 自身不抛出错误单独处理
+       */
+      if (err) {
+        throw new Error('[WebpackBundler] build exception');
+      } else {
+        console.log(stats?.toString('normal'));
+
+        if (stats?.hasErrors()) {
+          throw new Error('[WebpackBundler] build exception');
+        }
+      }
+
+      compiler.close(() => {
+        // nothing todo
+      });
+    });
   }
 }

@@ -12,6 +12,10 @@ export interface WebpackBuildOptions {
    */
   cwd: string;
   /**
+   * 是否持续构建模式
+   */
+  watch?: boolean;
+  /**
    * 文件访问基准路径
    */
   publicPath: string;
