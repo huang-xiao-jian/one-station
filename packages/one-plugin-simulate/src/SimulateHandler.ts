@@ -71,7 +71,9 @@ export class SimulateHandler {
     /**
      * browser history fallback
      */
-    app.use(history());
+    if (options.historyApiFallback) {
+      app.use(history());
+    }
 
     /**
      * TODO - http / https
@@ -84,10 +86,11 @@ export class SimulateHandler {
     const server = http.createServer(app);
 
     server.listen(options.port, () => {
-      const prefix = chalk.green('Ready');
-      const notification = `App listening at ${chalk.green(`${protocol}//${host}:${port}`)}`;
+      const prefix = chalk.cyan('[Simulator] project running at:');
+      const notification = chalk.cyan('Loopback: ' + chalk.green(`${protocol}://${host}:${port}`));
 
-      console.log(`${prefix} - ${notification}`);
+      console.log(prefix);
+      console.log(notification);
     });
   }
 }

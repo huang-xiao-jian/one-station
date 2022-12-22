@@ -21,7 +21,8 @@ export default createOnePlugin((api) => {
       command
         .option('--no-cors', 'disabled cors functionality')
         .option('--no-proxy', 'disabled automatic API proxy')
-        .option('--no-mock', 'disable automatic API mockery');
+        .option('--no-mock', 'disable automatic API mockery')
+        .option('--no-history-api-fallback', 'disabled browser history route support');
     })
     .defineAction(async (command) => {
       /**
@@ -35,8 +36,6 @@ export default createOnePlugin((api) => {
       const inlineOptions: InlineSimulateOptions = command.opts();
       const receiver = new SimulateOptionsHandler(api);
       const options = await receiver.handle(inlineOptions);
-
-      // console.log('options :>> ', options);
 
       // 工作环境预热
       await api.consumeHandler('assemble:once', [

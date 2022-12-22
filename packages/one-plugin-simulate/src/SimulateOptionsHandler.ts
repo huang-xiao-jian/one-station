@@ -28,6 +28,7 @@ export class SimulateOptionsHandler {
       cors: inlineOptions.cors,
       mock: inlineOptions.mock,
       proxy: inlineOptions.proxy,
+      historyApiFallback: inlineOptions.historyApiFallback,
     };
   }
 }

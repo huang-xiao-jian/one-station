@@ -18,6 +18,10 @@ export interface InlineSimulateOptions {
    * 预览服务器端口
    */
   port?: number;
+  /**
+   * 是否激活浏览器 History 路由模式
+   */
+  historyApiFallback: boolean;
 }
 
 /**
@@ -40,4 +44,8 @@ export interface SimulateOptions extends Omit<InlineSimulateOptions, 'port'> {
    * 确定性预览服务器端口
    */
   port: number;
+  /**
+   * 是否激活浏览器 History 路由模式
+   */
+  historyApiFallback: boolean;
 }
