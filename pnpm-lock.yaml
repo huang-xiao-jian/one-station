@@ -32,6 +32,7 @@ importers:
     specifiers:
       '@one/plugin': workspace:^
       '@one/plugin-assemble': workspace:^
+      '@one/plugin-proxy': workspace:^
       '@one/plugin-runner': workspace:^
       '@one/plugin-simulate': workspace:^
       '@one/plugin-staff': workspace:^
@@ -46,6 +47,7 @@ importers:
     dependencies:
       '@one/plugin': link:../one-plugin
       '@one/plugin-assemble': link:../one-plugin-assemble
+      '@one/plugin-proxy': link:../one-plugin-proxy
       '@one/plugin-runner': link:../one-plugin-runner
       '@one/plugin-simulate': link:../one-plugin-simulate
       '@one/plugin-staff': link:../one-plugin-staff
@@ -94,6 +96,29 @@ importers:
       joi: 17.7.0
     devDependencies:
       '@types/fs-extra': 9.0.13
+      typescript: 4.9.3
+
+  packages/one-plugin-proxy:
+    specifiers:
+      '@one/plugin': workspace:^
+      '@one/plugin-runner': workspace:^
+      '@types/express': ^4.17.15
+      '@types/lodash': ^4.14.191
+      express: ^4.18.2
+      http-proxy-middleware: ^2.0.6
+      joi: ^17.7.0
+      lodash: ^4.17.21
+      typescript: ^4.9.3
+    dependencies:
+      '@one/plugin': link:../one-plugin
+      '@one/plugin-runner': link:../one-plugin-runner
+      express: 4.18.2
+      http-proxy-middleware: 2.0.6_@types+express@4.17.15
+      joi: 17.7.0
+      lodash: 4.17.21
+    devDependencies:
+      '@types/express': 4.17.15
+      '@types/lodash': 4.14.191
       typescript: 4.9.3
 
   packages/one-plugin-runner:
@@ -2069,15 +2094,6 @@ packages:
       '@types/qs': 6.9.7
       '@types/range-parser': 1.2.4
 
-  /@types/express/4.17.14:
-    resolution: {integrity: sha512-TEbt+vaPFQ+xpxFLFssxUDXj5cWCxZJjIcB7Yg0k0GMHGtgtQgpvx/MUQUeAkNbA9AAGrwkAsoeItdTgS7FMyg==}
-    dependencies:
-      '@types/body-parser': 1.19.2
-      '@types/express-serve-static-core': 4.17.31
-      '@types/qs': 6.9.7
-      '@types/serve-static': 1.15.0
-    dev: false
-
   /@types/express/4.17.15:
     resolution: {integrity: sha512-Yv0k4bXGOH+8a+7bELd2PqHQsuiANB+A8a4gnQrkRWzrkKlb6KHaVvyXhqs04sVW/OWlbPyYxRgYlIXLfrufMQ==}
     dependencies:
@@ -2085,7 +2101,6 @@ packages:
       '@types/express-serve-static-core': 4.17.31
       '@types/qs': 6.9.7
       '@types/serve-static': 1.15.0
-    dev: true
 
   /@types/fs-extra/9.0.13:
     resolution: {integrity: sha512-nEnwB++1u5lVDM2UI4c1+5R+FYaKfaAzS4OococimjVm3nQw3TuzH5UNsocrcTBbhnerblyHj4A49qXbIiZdpA==}
@@ -2175,7 +2190,7 @@ packages:
   /@types/serve-index/1.9.1:
     resolution: {integrity: sha512-d/Hs3nWDxNL2xAczmOVZNj92YZCS6RGxfBPjKzuu/XirCgXdpKEb88dYNbrYGint6IVWLNP+yonwVAuRC0T2Dg==}
     dependencies:
-      '@types/express': 4.17.14
+      '@types/express': 4.17.15
     dev: false
 
   /@types/serve-static/1.15.0:
@@ -4131,7 +4146,7 @@ packages:
     resolution: {integrity: sha512-SGeBX54F94Wgu5RH3X5jsDtf4eHyRogWX1XGT3b4HuW3tQPM4AaBzoUji/4AAJNXCEOWZ5O0DgZmJw1947gD5Q==}
     dev: false
 
-  /http-proxy-middleware/2.0.6_@types+express@4.17.14:
+  /http-proxy-middleware/2.0.6_@types+express@4.17.15:
     resolution: {integrity: sha512-ya/UeJ6HVBYxrgYotAZo1KvPWlgB48kUJLDePFeneHsVujFaW5WNj2NgWCAE//B1Dl02BIfYlpNgBy8Kf8Rjmw==}
     engines: {node: '>=12.0.0'}
     peerDependencies:
@@ -4140,7 +4155,7 @@ packages:
       '@types/express':
         optional: true
     dependencies:
-      '@types/express': 4.17.14
+      '@types/express': 4.17.15
       '@types/http-proxy': 1.17.9
       http-proxy: 1.18.1
       is-glob: 4.0.3
@@ -6895,7 +6910,7 @@ packages:
     dependencies:
       '@types/bonjour': 3.5.10
       '@types/connect-history-api-fallback': 1.3.5
-      '@types/express': 4.17.14
+      '@types/express': 4.17.15
       '@types/serve-index': 1.9.1
       '@types/serve-static': 1.15.0
       '@types/sockjs': 0.3.33
@@ -6910,7 +6925,7 @@ packages:
       express: 4.18.2
       graceful-fs: 4.2.10
       html-entities: 2.3.3
-      http-proxy-middleware: 2.0.6_@types+express@4.17.14
+      http-proxy-middleware: 2.0.6_@types+express@4.17.15
       ipaddr.js: 2.0.1
       open: 8.4.0
       p-retry: 4.6.2

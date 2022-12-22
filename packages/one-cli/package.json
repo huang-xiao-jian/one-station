@@ -23,6 +23,7 @@
     "@one/plugin-assemble": "workspace:^",
     "@one/plugin-simulate": "workspace:^",
     "@one/plugin-staff": "workspace:^",
+    "@one/plugin-proxy": "workspace:^",
     "commander": "^9.4.1",
     "cosmiconfig": "^8.0.0",
     "injection-js": "^2.4.0",
