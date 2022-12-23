@@ -4,13 +4,13 @@ import { RequestHandler, createProxyMiddleware } from 'http-proxy-middleware';
 import { fromPairs, map } from 'lodash';
 
 import { toFlatProxyRules } from './convert';
-import { MiddlewareUnit, ProxyOptions } from './options';
+import { ProxyOptions } from './options';
 import { ProxySchema } from './schema';
 
 declare global {
   interface OneHandlerMapping {
     // TODO - 支持自定义参数
-    'proxy:middleware': () => Promise<MiddlewareUnit[]>;
+    'proxy:middleware': () => Promise<RequestHandler[]>;
   }
 }
 
