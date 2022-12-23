@@ -16,6 +16,7 @@
   "dependencies": {
     "@one/plugin": "workspace:^",
     "@one/plugin-runner": "workspace:^",
+    "@one/plugin-assemble": "workspace:^",
     "chalk": "^5.1.2",
     "compression": "^1.7.4",
     "connect-history-api-fallback": "^2.0.0",
