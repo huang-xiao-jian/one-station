@@ -1,6 +1,6 @@
 {
   "name": "@one/cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "yet, vscode flavor architecture for pandora",
   "main": "lib/index.js",
   "files": [

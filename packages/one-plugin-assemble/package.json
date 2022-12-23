@@ -1,6 +1,6 @@
 {
   "name": "@one/plugin-assemble",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "yet, assemble plugin to aggregate artifacts",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
