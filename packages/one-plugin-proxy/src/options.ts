@@ -44,5 +44,3 @@ export interface ProxyOptions {
    */
   rules?: ProxyRule[];
 }
-
-export type MiddlewareUnit = [pathname: string, handler: RequestHandler];

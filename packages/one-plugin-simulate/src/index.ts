@@ -2,6 +2,7 @@
 import 'reflect-metadata';
 
 import { createOnePlugin } from '@one/plugin-runner';
+import { toNumber } from 'lodash';
 
 import { SimulateHandler } from './SimulateHandler';
 import { SimulateOptionsHandler } from './SimulateOptionsHandler';
@@ -29,6 +30,7 @@ export default createOnePlugin((api) => {
     .referenceConfig(['ourDir'])
     .defineBehavior((command) => {
       command
+        .option('-p, --port <port>', 'server listening port', (raw) => toNumber(raw))
         .option('--no-cors', 'disabled cors functionality')
         .option('--no-proxy', 'disabled automatic API proxy')
         .option('--no-mock', 'disable automatic API mockery')
@@ -56,7 +58,7 @@ export default createOnePlugin((api) => {
       ]);
 
       // 功能执行
-      const simulator = new SimulateHandler();
+      const simulator = new SimulateHandler(api);
 
       // 终极一战
       simulator.serve(options);

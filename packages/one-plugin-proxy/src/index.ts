@@ -1,6 +1,6 @@
 import { OnePlugin } from '@one/plugin';
 import { createOnePlugin } from '@one/plugin-runner';
-import { createProxyMiddleware } from 'http-proxy-middleware';
+import { RequestHandler, createProxyMiddleware } from 'http-proxy-middleware';
 import { fromPairs, map } from 'lodash';
 
 import { toFlatProxyRules } from './convert';
@@ -27,17 +27,16 @@ const OneProxyPlugin: OnePlugin = createOnePlugin((api) => {
    */
   api.registerHandler('proxy:middleware', async () => {
     const proxy: ProxyOptions = api.consumeConfig('proxy');
-    const units: MiddlewareUnit[] = [];
+    const units: RequestHandler[] = [];
     const rules = toFlatProxyRules(proxy.rules);
     rules.forEach((rule) => {
-      units.push([
-        rule.context,
-        createProxyMiddleware({
+      units.push(
+        createProxyMiddleware(rule.context, {
           target: rule.target,
           changeOrigin: rule.changeOrigin,
           pathRewrite: fromPairs(map(rule.rewrites, (rewrite) => [rewrite.from, rewrite.to])),
         }),
-      ]);
+      );
     });
     return units;
   });

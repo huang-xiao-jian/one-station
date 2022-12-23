@@ -1,3 +1,5 @@
+/// <reference types="../../one-plugin-proxy" />
+import { OnePluginApi } from '@one/plugin';
 import compression from 'compression';
 import history from 'connect-history-api-fallback';
 import cors from 'cors';
@@ -11,6 +13,8 @@ import serve from 'serve-static';
 import { SimulateOptions } from './options';
 
 export class SimulateHandler {
+  constructor(private readonly api: OnePluginApi) {}
+
   async serve(options: SimulateOptions) {
     const app = express();
     const { default: chalk } = await import('chalk');
@@ -52,7 +56,13 @@ export class SimulateHandler {
 
     /**
      * TODO - proxy
+     *
      */
+    const proxies = await this.api.consumeHandler('proxy:middleware', []);
+
+    proxies.forEach((proxy) => {
+      app.use(proxy);
+    });
 
     /**
      * TODO - mockery
