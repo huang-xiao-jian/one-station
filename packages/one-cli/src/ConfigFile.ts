@@ -1,7 +1,12 @@
 import assert from 'assert';
 import { cosmiconfig } from 'cosmiconfig';
-import { InjectionToken, ValueProvider } from 'injection-js';
+import fs from 'fs/promises';
+import handlebars from 'handlebars';
+import { FactoryProvider, InjectionToken } from 'injection-js';
 import { isArray } from 'lodash';
+import { parse } from 'yaml';
+
+import { OneEnvironment } from './OneEnvironment';
 
 export interface ConfigFile {
   /**
@@ -17,7 +22,7 @@ export interface ConfigFile {
 
 export const ConfigFileToken = new InjectionToken<ConfigFile>('ConfigFile');
 
-export async function createConfigFileProvider(): Promise<ValueProvider> {
+export async function createConfigFileProvider(): Promise<FactoryProvider> {
   const explorer = cosmiconfig('one', {
     searchPlaces: [`package.json`, `.onerc`, `.onerc.yml`, `.onerc.json`],
   });
@@ -26,24 +31,32 @@ export async function createConfigFileProvider(): Promise<ValueProvider> {
 
   assert.ok(discovery, '[ConfigFileProvider] explicit config file required');
 
-  const configResult = await explorer.load(discovery.filepath);
-  const configuration = configResult?.config;
-
-  assert.ok(
-    configuration,
-    `[ConfigFileProvider] must provide useful configuration within config file`,
-  );
-
-  // 插件声明为强制，否则不具备任何功能
-  const plugins = configuration['plugins'];
-
-  assert.ok(isArray(plugins), `[ConfigFileProvider] plugin property required within config file`);
+  const raw = await fs.readFile(discovery.filepath, 'utf-8');
 
   return {
     provide: ConfigFileToken,
-    useValue: {
-      filename: discovery.filepath,
-      configuration,
+    deps: [OneEnvironment],
+    useFactory(env: OneEnvironment) {
+      const content = handlebars.compile(raw)(env.full);
+      const configuration = parse(content);
+
+      assert.ok(
+        configuration,
+        `[ConfigFileProvider] must provide useful configuration within config file`,
+      );
+
+      // 插件声明为强制，否则不具备任何功能
+      const plugins = configuration['plugins'];
+
+      assert.ok(
+        isArray(plugins),
+        `[ConfigFileProvider] plugin property required within config file`,
+      );
+
+      return {
+        filename: discovery.filepath,
+        configuration,
+      };
     },
   };
 }

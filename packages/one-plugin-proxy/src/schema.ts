@@ -16,7 +16,8 @@ export const ProxySchema = Joi.object({
       rewrites: Joi.array().items(
         Joi.object({
           from: Joi.string().min(3).max(30).required(),
-          to: Joi.string().min(3).max(30).required(),
+          // 重写路由，一般为截取路由，允许为空字符串
+          to: Joi.string().max(30),
         }),
       ),
     }),
