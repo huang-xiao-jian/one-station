@@ -1,9 +1,16 @@
 {
   "$schema": "https://turbo.build/schema.json",
   "pipeline": {
+    "clean": {
+      "cache": false
+    },
     "build": {
       "outputs": ["lib/**"],
       "dependsOn": ["^build"]
+    },
+    "publish": {
+      "cache": false,
+      "dependsOn": ["^publish"]
     },
     "dev": {
       "cache": false

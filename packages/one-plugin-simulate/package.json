@@ -6,7 +6,9 @@
   "types": "lib/index.d.ts",
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc"
+    "build": "tsc",
+    "clean": "rm -rf lib",
+    "publish": "pnpm publish --registry=https://npm.zatech.online/"
   },
   "keywords": [],
   "author": "jian.huang",
