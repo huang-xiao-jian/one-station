@@ -4,6 +4,9 @@
   "description": "yet, plugin system engine",
   "types": "src/index.ts",
   "keywords": [],
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",

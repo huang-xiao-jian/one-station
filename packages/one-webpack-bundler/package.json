@@ -2,11 +2,11 @@
   "name": "@one/webpack-bundler",
   "version": "0.2.0",
   "description": "yet, unify webpack based web bundler",
+  "main": "lib/index.js",
+  "types": "src/index.ts",
   "files": [
     "lib"
   ],
-  "main": "lib/index.js",
-  "types": "src/index.ts",
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",

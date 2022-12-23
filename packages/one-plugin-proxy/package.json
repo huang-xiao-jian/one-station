@@ -4,6 +4,9 @@
   "description": "yet, toolkit for proxy upstream",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",

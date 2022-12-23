@@ -4,6 +4,9 @@
   "description": "yet, preset toolkit for visual palette",
   "main": "lib/index.js",
   "types": "src/index.ts",
+  "files": [
+    "lib"
+  ],
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
