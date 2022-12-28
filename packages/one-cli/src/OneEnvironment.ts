@@ -25,16 +25,18 @@ interface CreateOneEnvironmentOptions {
   /**
    * 环境变量工作
    */
-  envFile: string;
+  envFile?: string;
+  /**
+   * 额外扩展环境标记
+   */
+  extraEnv?: string;
 }
 
 export async function createOneEnvironmentProvider(
   options: CreateOneEnvironmentOptions,
 ): Promise<ValueProvider> {
-  const files = [
-    path.join(options.cwd, options.envFile),
-    path.join(options.cwd, `${options.envFile}.local`),
-  ];
+  const { envFile = '.env', extraEnv = 'local' } = options;
+  const files = [path.join(options.cwd, envFile), path.join(options.cwd, `${envFile}.${extraEnv}`)];
 
   const distribution = await Promise.all(
     files.map(async (filename) => {

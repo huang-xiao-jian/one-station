@@ -10,9 +10,11 @@ import { OnePlatform } from './OnePlatform';
 
 (async () => {
   // 读取环境配置文件拆分
+  const extraEnv = process.env.ONE_EXTRA_ENV || 'local';
   const OneEnvironmentProvider = await createOneEnvironmentProvider({
     cwd: process.cwd(),
     envFile: '.env',
+    extraEnv,
   });
   // 读取配置文件职能拆分
   const ConfigFileProvider = await createConfigFileProvider();

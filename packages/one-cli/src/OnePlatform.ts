@@ -15,6 +15,7 @@ import { isFunction, isNil } from 'lodash';
 import { CommandHooks } from './CommandHooks';
 import { ConfigFileToken } from './ConfigFile';
 import type { ConfigFile } from './ConfigFile';
+import { OneEnvironment } from './OneEnvironment';
 
 @Injectable()
 export class OnePlatform implements OnePluginApi {
@@ -40,7 +41,10 @@ export class OnePlatform implements OnePluginApi {
   private readonly environmentVariableStore: Map<string, IEnvironmentVariableDescriptor> =
     new Map();
 
-  constructor(@Inject(ConfigFileToken) private readonly configFile: ConfigFile) {}
+  constructor(
+    private readonly environment: OneEnvironment,
+    @Inject(ConfigFileToken) private readonly configFile: ConfigFile,
+  ) {}
 
   /**
    * TODO - 冲突检测
@@ -150,7 +154,7 @@ export class OnePlatform implements OnePluginApi {
 
     assert.ok(descriptor);
 
-    const raw = process.env[descriptor.name];
+    const raw = this.environment.get(descriptor.name);
 
     // 环境变量未定义，透传默认值即可
     if (isNil(raw)) {

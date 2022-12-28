@@ -1,6 +1,5 @@
 {
   "extends": "../../tsconfig.json",
-  "include": ["src", "legacy/CommandRegistry.ts", "legacy/ConfigManager.ts"],
   "compilerOptions": {
     "outDir": "lib"
   }
