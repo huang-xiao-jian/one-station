@@ -1,6 +1,7 @@
 import { Injectable } from 'injection-js';
 import { AsyncSeriesHook } from 'tapable';
 
+import { WebpackBundlerCacheAxis } from './WebpackBundlerCacheAxis';
 import { WebpackBundlerConfig } from './WebpackBundlerConfig';
 import { WebpackBundlerInjection } from './WebpackBundlerInjection';
 import { WebpackBundlerPlugin } from './WebpackBundlerPlugin';
@@ -9,7 +10,9 @@ export interface WebpackBundlerHooks {
   /**
    * 实例化 webpack 构建配置
    */
-  blueprint: AsyncSeriesHook<[WebpackBundlerConfig, WebpackBundlerInjection]>;
+  blueprint: AsyncSeriesHook<
+    [WebpackBundlerConfig, WebpackBundlerInjection, WebpackBundlerCacheAxis]
+  >;
 }
 
 @Injectable()
@@ -18,7 +21,11 @@ export class WebpackBundler {
    * 配置插件化核心
    */
   readonly hooks: WebpackBundlerHooks = {
-    blueprint: new AsyncSeriesHook(['webpackBundlerConfig', 'webpackBundlerInjection']),
+    blueprint: new AsyncSeriesHook([
+      'webpackBundlerConfig',
+      'webpackBundlerInjection',
+      'webpackBundlerCacheAxis',
+    ]),
   };
 
   /**
@@ -29,6 +36,7 @@ export class WebpackBundler {
   constructor(
     private readonly wbc: WebpackBundlerConfig,
     private readonly wbi: WebpackBundlerInjection,
+    private readonly wbCacheAxis: WebpackBundlerCacheAxis,
   ) {}
 
   /**
@@ -46,7 +54,7 @@ export class WebpackBundler {
    */
   async warmUp() {
     // 插件体系 blueprint 环节注册
-    await this.hooks.blueprint.promise(this.wbc, this.wbi);
+    await this.hooks.blueprint.promise(this.wbc, this.wbi, this.wbCacheAxis);
     // config 插件关联插件调用
     await this.wbc.hooks.initialize.promise(this.wbc.config);
     await this.wbc.hooks.adjustment.promise(this.wbc.config);

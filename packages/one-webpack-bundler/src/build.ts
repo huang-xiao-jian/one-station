@@ -9,7 +9,7 @@ import { WebpackBundler } from './internal/WebpackBundler';
 import { BundleAnalyzePlugin } from './plugins/AnalyzePlugin';
 import { AssetRulePlugin } from './plugins/AssetRulePlugin';
 import { BrowserBaselinePlugin } from './plugins/BrowserBaseline/BrowserBaseline';
-import { CacheSmoothPlugin } from './plugins/CacheSmoothPlugin';
+// import { CacheSmoothPlugin } from './plugins/CacheSmoothPlugin';
 import { CopyConsistentPlugin } from './plugins/CopyConsistentPlugin';
 import { MomentSmoothPlugin } from './plugins/MomentSmoothPlugin';
 import { ProgressSmoothPlugin } from './plugins/ProgressSmoothPlugin';
@@ -29,7 +29,7 @@ export async function build(options: WebpackBuildOptions) {
     new BundleAnalyzePlugin(),
     new MomentSmoothPlugin(),
     new CopyConsistentPlugin(),
-    new CacheSmoothPlugin(),
+    // new CacheSmoothPlugin(),
     new ProgressSmoothPlugin(),
   ]);
   // 入参插件优先级更高，调用顺序靠后
