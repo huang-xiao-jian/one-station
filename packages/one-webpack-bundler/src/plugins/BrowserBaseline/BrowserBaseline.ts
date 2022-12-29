@@ -22,6 +22,8 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
         const publicPath = wbi.config<string>('publicPath');
         // 构建模式默认开发模式
         const mode = environment === 'production' ? 'production' : 'development';
+        // 子项目输出目录约定固定
+        const outDir = path.resolve(cwd, './dist');
 
         /**
          * webpack chain 相对路径存在问题，约定为 cwd 路径作为基准，暂时不可修改
@@ -62,10 +64,10 @@ export class BrowserBaselinePlugin implements WebpackBundlerPlugin {
          * TODO - 差异点在于 publicPath / outDir，由外部传入
          */
         chain.output
-          .path(path.resolve(cwd, './dist'))
+          .path(outDir)
           .publicPath(publicPath)
-          .filename('static/[contenthash].js')
-          .chunkFilename('static/[contenthash].js')
+          .filename('static/[contenthash:8].js')
+          .chunkFilename('static/[contenthash:8].js')
           /**
            * TODO - 目测影响代码生成模板
            *
