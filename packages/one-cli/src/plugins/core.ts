@@ -20,6 +20,14 @@ export const OnePluginCore = createOnePlugin((api) => {
   });
 
   /**
+   * 必须提供插件配置
+   */
+  api.registerConfig({
+    key: 'plugins',
+    schema: Joi.array().items(Joi.string()).required(),
+  });
+
+  /**
    * 输出目录，独立项目、monorepo 相同逻辑
    */
   api.registerConfig({

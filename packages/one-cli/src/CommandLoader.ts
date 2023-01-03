@@ -1,7 +1,3 @@
-import OnePluginAssemble from '@one/plugin-assemble';
-import OnePluginProxy from '@one/plugin-proxy';
-import OnePluginSimulate from '@one/plugin-simulate';
-import OnePluginStaff from '@one/plugin-staff';
 import { Injectable } from 'injection-js';
 
 import { OnePlatform } from './OnePlatform';
@@ -20,15 +16,16 @@ export class CommandLoader {
    */
   async scan() {
     /**
-     * 标准化模板代码
-     *
-     * 特别说明：
-     *   内部插件执行顺序靠前
+     * 核心内建插件优先
      */
     OnePluginCore(this.platform);
-    OnePluginAssemble(this.platform);
-    OnePluginStaff(this.platform);
-    OnePluginSimulate(this.platform);
-    OnePluginProxy(this.platform);
+    /**
+     * 可配置插件
+     */
+    const plugins: string[] = this.platform.consumeConfig('plugins');
+
+    for (const name of plugins) {
+      await require(name).default(this.platform);
+    }
   }
 }

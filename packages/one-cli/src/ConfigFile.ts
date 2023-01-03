@@ -3,7 +3,6 @@ import { cosmiconfig } from 'cosmiconfig';
 import fs from 'fs/promises';
 import handlebars from 'handlebars';
 import { FactoryProvider, InjectionToken } from 'injection-js';
-import { isArray } from 'lodash';
 import { parse } from 'yaml';
 
 import { OneEnvironment } from './OneEnvironment';
@@ -43,14 +42,6 @@ export async function createConfigFileProvider(): Promise<FactoryProvider> {
       assert.ok(
         configuration,
         `[ConfigFileProvider] must provide useful configuration within config file`,
-      );
-
-      // 插件声明为强制，否则不具备任何功能
-      const plugins = configuration['plugins'];
-
-      assert.ok(
-        isArray(plugins),
-        `[ConfigFileProvider] plugin property required within config file`,
       );
 
       return {
