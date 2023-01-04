@@ -9,8 +9,7 @@
   ],
   "scripts": {
     "dev": "tsc --watch",
-    "build": "tsc",
-    "publish": "pnpm publish --registry=https://npm.zatech.online/"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "jian.huang",

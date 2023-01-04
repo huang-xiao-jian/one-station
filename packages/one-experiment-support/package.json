@@ -3,9 +3,7 @@
   "version": "0.3.0",
   "description": "yet, unify convenient type support",
   "keywords": [],
-  "scripts": {
-    "publish": "pnpm publish --registry=https://npm.zatech.online/"
-  },
+  "scripts": {},
   "author": "jian.huang",
   "license": "ISC",
   "types": "index.ts",

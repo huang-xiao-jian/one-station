@@ -10,8 +10,7 @@
   "scripts": {
     "dev": "tsc --watch",
     "build": "tsc",
-    "clean": "rm -rf lib",
-    "publish": "pnpm publish --registry=https://npm.zatech.online/"
+    "clean": "rm -rf lib"
   },
   "keywords": [],
   "author": "jian.huang",
