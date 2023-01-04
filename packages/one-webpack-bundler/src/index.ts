@@ -4,3 +4,4 @@ export * from './serve';
 export * from './internal/WebpackBundlerPlugin';
 export * from './internal/WebpackBundlerInjection';
 export * from './internal/WebpackBundler';
+export * from './internal/BuildOptions';
