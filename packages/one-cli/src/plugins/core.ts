@@ -3,7 +3,7 @@ import { createOnePlugin } from '@one/plugin-runner';
 import Joi from 'joi';
 import path from 'path';
 
-export const OnePluginCore = createOnePlugin((api) => {
+export default createOnePlugin((api) => {
   /**
    * 推荐设置为项目根目录
    */
@@ -17,14 +17,6 @@ export const OnePluginCore = createOnePlugin((api) => {
     transform(material: IConfigTransformMaterial<string>) {
       return path.join(material.rcfile, material.value);
     },
-  });
-
-  /**
-   * 必须提供插件配置
-   */
-  api.registerConfig({
-    key: 'plugins',
-    schema: Joi.array().items(Joi.string()).required(),
   });
 
   /**

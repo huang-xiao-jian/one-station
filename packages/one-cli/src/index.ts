@@ -2,11 +2,11 @@ import 'reflect-metadata';
 
 import { ReflectiveInjector } from 'injection-js';
 
-import { CommandLoader } from './CommandLoader';
 import { CommandManager } from './CommandManager';
 import { createConfigFileProvider } from './ConfigFile';
 import { createOneEnvironmentProvider } from './OneEnvironment';
 import { OnePlatform } from './OnePlatform';
+import { OnePluginLoader } from './OnePluginLoader';
 
 (async () => {
   // 读取环境配置文件拆分
@@ -23,16 +23,16 @@ import { OnePlatform } from './OnePlatform';
     OneEnvironmentProvider,
     ConfigFileProvider,
     CommandManager,
-    CommandLoader,
+    OnePluginLoader,
     OnePlatform,
   ]);
 
   // 挂载插件
+  const onePluginLoader: OnePluginLoader = injector.get(OnePluginLoader);
   const commandManager: CommandManager = injector.get(CommandManager);
-  const commandLoader: CommandLoader = injector.get(CommandLoader);
 
   // 加载配置插件
-  await commandLoader.scan();
+  await onePluginLoader.scan();
 
   // 插件采集完毕，执行实际指令
   await commandManager.bootstrap();
