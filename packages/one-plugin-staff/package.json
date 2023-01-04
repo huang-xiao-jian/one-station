@@ -1,6 +1,6 @@
 {
   "name": "@one/plugin-staff",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "yet, preset toolkit for visual palette",
   "main": "lib/index.js",
   "types": "src/index.ts",

@@ -1,5 +1,17 @@
 # @one/webpack-bundler
 
+## 0.3.0
+
+### Minor Changes
+
+- yet, release for great staff
+
+### Patch Changes
+
+- Updated dependencies
+  - @one/experiment-support@0.3.0
+  - @one/plugin@0.3.0
+
 ## 0.2.0
 
 ### Minor Changes

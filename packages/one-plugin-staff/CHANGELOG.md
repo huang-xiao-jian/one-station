@@ -1,5 +1,18 @@
 # @one/plugin-staff
 
+## 0.3.0
+
+### Minor Changes
+
+- yet, release for great staff
+
+### Patch Changes
+
+- Updated dependencies
+  - @one/plugin@0.3.0
+  - @one/plugin-runner@0.3.0
+  - @one/webpack-bundler@0.3.0
+
 ## 0.2.0
 
 ### Minor Changes
